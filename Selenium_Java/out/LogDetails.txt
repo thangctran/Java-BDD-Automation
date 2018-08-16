@@ -1,0 +1,79 @@
+2018/08/16 10:26:33.451 [TESTCASE] Start ##### FE001-Login - Login successful #####
+2018/08/16 10:26:33.464 [STEP] Go to https://www.phptravels.net
+2018/08/16 10:26:33.469 [INFO] navigateURL :: [https://www.phptravels.net]
+2018/08/16 10:26:45.412 [STEP] Select MY ACCOUNT -> Login
+2018/08/16 10:26:45.420 [INFO] click :: [(//ul[contains(@*,'sidebar')])[last()]/li[.//*[contains(text(),'My Account')]]/a]
+2018/08/16 10:26:45.768 [INFO] click :: [//*[./*[@aria-expanded='true']]//li/a[text()=' Login']]
+2018/08/16 10:26:47.175 [STEP] Verify Login page is displayed
+2018/08/16 10:26:47.209 [PASSED] verifyTitle :: [Login] = [Login]
+2018/08/16 10:26:47.231 [PASSED] verifyURL :: [https://www.phptravels.net/login] = [https://www.phptravels.net/login]
+2018/08/16 10:26:47.240 [STEP] Login with valid Email and Password
+2018/08/16 10:26:47.274 [INFO] setText :: [user@phptravels.com] :: [//input[@placeholder='Email'][not(@id)]]
+2018/08/16 10:26:47.570 [INFO] setText :: [demouser] :: [//input[@name='password']]
+2018/08/16 10:26:47.731 [INFO] click :: [//button[@type='submit'][contains(@class,'btn-block l')]]
+2018/08/16 10:26:47.900 [STEP] Verify My Account main page is displayed
+2018/08/16 10:26:54.206 [PASSED] verifyAttributeElement :: [textContent]:[//h3[@class='RTL']] :: [Hi, Johny Smith] = [Hi, Johny Smith]
+2018/08/16 10:26:54.268 [PASSED] verifyAttributeElement :: [innerText]:[//span[@class='h4']] :: [16 August 2018] = [16 August 2018]
+2018/08/16 10:26:54.275 [INFO] verifyElementPresent :: [//ul[@class='nav profile-tabs']/li[./a[contains(.,'Bookings')]]]
+2018/08/16 10:26:54.340 [PASSED] verifyElementPresent :: [//ul[@class='nav profile-tabs']/li[./a[contains(.,'Bookings')]]] :: [true] = [true]
+2018/08/16 10:26:54.347 [INFO] verifyElementPresent :: [//ul[@class='nav profile-tabs']/li[./a[contains(.,'My Profile')]]]
+2018/08/16 10:26:54.418 [PASSED] verifyElementPresent :: [//ul[@class='nav profile-tabs']/li[./a[contains(.,'My Profile')]]] :: [true] = [true]
+2018/08/16 10:26:54.425 [INFO] verifyElementPresent :: [//ul[@class='nav profile-tabs']/li[./a[contains(.,'Wishlist')]]]
+2018/08/16 10:26:54.498 [PASSED] verifyElementPresent :: [//ul[@class='nav profile-tabs']/li[./a[contains(.,'Wishlist')]]] :: [true] = [true]
+2018/08/16 10:26:54.507 [INFO] verifyElementPresent :: [//ul[@class='nav profile-tabs']/li[./a[contains(.,'Newsletter')]]]
+2018/08/16 10:26:54.588 [PASSED] verifyElementPresent :: [//ul[@class='nav profile-tabs']/li[./a[contains(.,'Newsletter')]]] :: [true] = [true]
+2018/08/16 10:26:54.597 [INFO] verifyElementPresent :: [//ul[@class='nav profile-tabs' or @id='social-sidebar-menu']/li/a/*[@class='bookings-icon']]
+2018/08/16 10:26:54.675 [PASSED] verifyElementPresent :: [//ul[@class='nav profile-tabs' or @id='social-sidebar-menu']/li/a/*[@class='bookings-icon']] :: [true] = [true]
+2018/08/16 10:26:54.684 [INFO] verifyElementPresent :: [//ul[@class='nav profile-tabs' or @id='social-sidebar-menu']/li/a/*[@class='profile-icon']]
+2018/08/16 10:26:54.756 [PASSED] verifyElementPresent :: [//ul[@class='nav profile-tabs' or @id='social-sidebar-menu']/li/a/*[@class='profile-icon']] :: [true] = [true]
+2018/08/16 10:26:54.766 [INFO] verifyElementPresent :: [//ul[@class='nav profile-tabs' or @id='social-sidebar-menu']/li/a/*[@class='wishlist-icon']]
+2018/08/16 10:26:54.826 [PASSED] verifyElementPresent :: [//ul[@class='nav profile-tabs' or @id='social-sidebar-menu']/li/a/*[@class='wishlist-icon']] :: [true] = [true]
+2018/08/16 10:26:54.835 [INFO] verifyElementPresent :: [//ul[@class='nav profile-tabs' or @id='social-sidebar-menu']/li/a/*[@class='newsletter-icon']]
+2018/08/16 10:26:54.904 [PASSED] verifyElementPresent :: [//ul[@class='nav profile-tabs' or @id='social-sidebar-menu']/li/a/*[@class='newsletter-icon']] :: [true] = [true]
+2018/08/16 10:26:54.974 [PASSED] verifyAttributeElement :: [class]:[//ul[@class='nav profile-tabs']/li[./a[contains(.,'Bookings')]]] :: [active] = [active]
+2018/08/16 10:26:54.986 [TESTCASE] End ##### FE001-Login - Login successful #####
+2018/08/16 10:26:54.999 [TESTCASE] Start ##### FE005-Hotels - Verify Hotel Filter #####
+2018/08/16 10:26:55.008 [STEP] Go to https://www.phptravels.net/hotels
+2018/08/16 10:26:55.023 [INFO] navigateURL :: [https://www.phptravels.net/hotels]
+2018/08/16 10:26:57.898 [STEP] Filter Search: Star grade; Price range; Property Types and Amenities
+2018/08/16 10:26:58.274 [INFO] dragAndDrop ::[(//div[@class='slider-handle round'])[1]] to [//div[@class='slider-track']]:[0,2]
+2018/08/16 10:26:58.961 [INFO] dragAndDrop ::[(//div[@class='slider-handle round'])[2]] to [//div[@class='slider-track']]:[105,2]
+2018/08/16 10:26:59.173 [INFO] click :: [(//*[./input[@name='stars']])[4]]
+2018/08/16 10:26:59.317 [INFO] selectCheckbox :: [true] :: [//*[starts-with(@class,'icheckbox')][./input[@type='checkbox'][@*='Hotel']]]
+2018/08/16 10:26:59.455 [INFO] selectCheckbox :: [true] :: [//*[starts-with(@class,'icheckbox')][./input[@type='checkbox'][@*='Villa']]]
+2018/08/16 10:26:59.611 [INFO] selectCheckbox :: [true] :: [//*[starts-with(@class,'icheckbox')][./input[@type='checkbox'][@*='Night Club']]]
+2018/08/16 10:26:59.779 [INFO] selectCheckbox :: [true] :: [//*[starts-with(@class,'icheckbox')][./input[@type='checkbox'][@*='Restaurant']]]
+2018/08/16 10:26:59.942 [INFO] click :: [//button[text()='Search']]
+2018/08/16 10:27:01.629 [STEP] Number Start of each Hotel is from 4 to 5 starts
+2018/08/16 10:27:01.801 [PASSED] verifyStartOnTable :: [//*[@class='itemscontainer' or @class='panel panel-default']/table[contains(@class,'table-striped')]//tr[1]/td[1]//i[@class='star fa fa-star']] :: [4] >= [4]
+2018/08/16 10:27:01.906 [PASSED] verifyStartOnTable :: [//*[@class='itemscontainer' or @class='panel panel-default']/table[contains(@class,'table-striped')]//tr[2]/td[1]//i[@class='star fa fa-star']] :: [5] >= [4]
+2018/08/16 10:27:02.019 [PASSED] verifyStartOnTable :: [//*[@class='itemscontainer' or @class='panel panel-default']/table[contains(@class,'table-striped')]//tr[3]/td[1]//i[@class='star fa fa-star']] :: [4] >= [4]
+2018/08/16 10:27:02.029 [TESTCASE] End ##### FE005-Hotels - Verify Hotel Filter #####
+2018/08/16 10:27:02.040 [TESTCASE] Start ##### BE006-Hotels-Upload gallery #####
+2018/08/16 10:27:02.053 [STEP] Navigate and login as Admin to page https://www.phptravels.net/admin
+2018/08/16 10:27:02.061 [INFO] navigateURL :: [https://www.phptravels.net/admin]
+2018/08/16 10:27:05.078 [INFO] setText :: [admin@phptravels.com] :: [//input[@placeholder='Email'][not(@id)]]
+2018/08/16 10:27:05.383 [INFO] setText :: [demoadmin] :: [//input[@name='password']]
+2018/08/16 10:27:05.587 [INFO] click :: [//button[@type='submit'][contains(@class,'btn-block l')]]
+2018/08/16 10:27:05.804 [STEP] Go to Hotels Management
+2018/08/16 10:27:05.817 [INFO] click :: [(//ul[contains(@*,'sidebar')])[last()]/li[.//*[contains(text(),'Hotels')]]/a]
+2018/08/16 10:27:14.129 [INFO] click :: [//*[./*[@aria-expanded='true']]//li/a[text()='Hotels']]
+2018/08/16 10:27:18.038 [STEP] Upload image to a Hotel record
+2018/08/16 10:27:18.162 [INFO] clickCellOnTable :: [4,Gallery] :: [//table//tr[4]/td[count(//tr/th[text()='Gallery']/preceding-sibling::th)+1]//a]
+2018/08/16 10:27:21.753 [INFO] click :: [//a[@aria-controls='UploadPhotos']]
+2018/08/16 10:27:21.906 [INFO] click :: [//span[@class='drop']]
+2018/08/16 10:27:22.255 [INFO] typeKeysByRobot :: [D:\Training\Selenium_Java\data\Image.PNG]
+2018/08/16 10:27:28.446 [STEP] Go to Hotels Management again
+2018/08/16 10:27:28.455 [INFO] click :: [(//ul[contains(@*,'sidebar')])[last()]/li[.//*[contains(text(),'Hotels')]]/a]
+2018/08/16 10:27:28.554 [INFO] click :: [//*[./*[@aria-expanded='true']]//li/a[text()='Hotels']]
+2018/08/16 10:27:35.272 [STEP] Verify image is uploaded for this hotel
+2018/08/16 10:27:35.406 [FAILED] verifyUpload :: [15] = [16]
+2018/08/16 10:27:35.415 [TESTCASE] End ##### BE006-Hotels-Upload gallery #####
+2018/08/16 10:27:35.423 [TESTCASE] Start ##### BE008-Hotels-Delete Hotels by Delete Selected button #####
+2018/08/16 10:27:35.432 [STEP] Delete Hotel by by Delete Selected button
+2018/08/16 10:27:35.477 [INFO] selectCheckbox :: [true] :: [//table//tr[4]/td[1]//*[input]]
+2018/08/16 10:27:35.654 [INFO] click :: [//a[text()=' Delete Selected']]
+2018/08/16 10:27:35.806 [INFO] alertDialog :: [accept]
+2018/08/16 10:27:37.862 [STEP] Verify the Hotel is deleted on list.
+2018/08/16 10:27:40.518 [PASSED] verifyHotelDeleted :: [Rose Rayhaan Rotana] != [Islamabad Marriott Hotel]
+2018/08/16 10:27:40.529 [TESTCASE] End ##### BE008-Hotels-Delete Hotels by Delete Selected button #####
