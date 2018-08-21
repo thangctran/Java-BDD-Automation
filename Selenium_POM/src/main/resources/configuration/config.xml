@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <WebDriverType>chrome</WebDriverType> <!-- Drivetype to execute: firefox, ie, chrome -->
+    <LoadTimeOut>20</LoadTimeOut>  <!-- Time out for loading page and find element -->
+    <HandleError>true</HandleError> <!-- Handle error to run script clear environment if failed: true, false -->
+    <LogMode>1</LogMode> <!-- Type to print log: 0:Debug, 1:Normal -->
+    <CaptureImage>true</CaptureImage> <!-- Optional to capture image for validation point: true, false -->
+</Configuration>
