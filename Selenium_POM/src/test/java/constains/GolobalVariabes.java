@@ -11,6 +11,7 @@ public class GolobalVariabes {
     public final static String urlLogin = "https://www.phptravels.net/login";
     public final static String emailFE = "user@phptravels.com";
     public final static String passwordFE = "demouser";
+    public final static String userName = "Johny Smith";
     public final static String urlHotels = urlFE + "/hotels";
     public final static String urlFlights = urlFE + "/flights";
     public final static String urlCars = urlFE + "/cars";

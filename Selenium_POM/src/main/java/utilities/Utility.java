@@ -1,8 +1,8 @@
 package utilities;
 
-import org.testng.Assert;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import org.testng.Assert;
 import static helpers.FileHelper.writeLogFile;
 
 public class Utility {

@@ -1,24 +1,25 @@
 package elements;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import utilities.Enums;
-import static utilities.Utility.*;
-import java.util.ArrayList;
-import java.util.List;
-
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
 import drivers.SeleniumDrivers;
+import static utilities.Utility.*;
+import utilities.Enums;
 
 public class UIElements {
     final static WebDriver driver = SeleniumDrivers.setSeleniumDrivers("chrome", 20);
