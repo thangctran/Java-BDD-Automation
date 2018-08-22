@@ -17,22 +17,25 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import drivers.SeleniumDrivers;
-import static utilities.Utility.*;
+import utilities.Utility;
 import utilities.Enums;
 
 public class UIElements {
-    final static WebDriver driver = SeleniumDrivers.setSeleniumDrivers("chrome", 20);
+//    static final WebDriver driver = SeleniumDrivers.setSeleniumDrivers();
+    private static WebDriver driver;
+    public static void setDriver(WebDriver driverTest) {
+        if (driver == null) driver = driverTest;
+    }
 
     public static WebElement convertToElement(String actionName, String strXpath, String dynamicValue, int logMode){
         WebElement element;
-        String newXpath = convertXpath(strXpath, dynamicValue);
+        String newXpath = Utility.convertXpath(strXpath, dynamicValue);
 
         try {
-            logInfo("INFO", String.format("%s :: [%s]", actionName, newXpath), logMode);
+            Utility.logInfo("INFO", String.format("%s :: [%s]", actionName, newXpath), logMode);
             element = driver.findElement(By.xpath(newXpath));
         } catch (Exception e){
-            logInfo("WARN", String.format("%s :: Not Found[%s]", actionName, newXpath), 1);
+            Utility.logInfo("ERROR", String.format("%s :: Not Found[%s]", actionName, newXpath), 1);
             return null;
         }
         return element;
@@ -42,9 +45,9 @@ public class UIElements {
         try {
             WebDriverWait wait = new WebDriverWait(driver, iTimeOut);
             WebElement a = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(strXpath)));
-            logInfo("DEBUG", "waitForPresent :: appear [" + strXpath + "]", 0);
+            Utility.logInfo("DEBUG", "waitForPresent :: appear [" + strXpath + "]", 0);
         } catch (Exception e) {
-            logInfo("DEBUG", "waitForPresent :: disappear [" + strXpath + "]", 0);
+            Utility.logInfo("DEBUG", "waitForPresent :: disappear [" + strXpath + "]", 0);
         }
     }
 
@@ -69,7 +72,7 @@ public class UIElements {
     }
 
     public static void clickMousePosition(String strXpath, String dynamicValue, Integer x, Integer y, Enums.CLICK_TYPE clickType) {
-        String newXpath = convertXpath(strXpath, dynamicValue);
+        String newXpath = Utility.convertXpath(strXpath, dynamicValue);
         WebElement element = driver.findElement(By.xpath(newXpath));
 
         int eleWidth = Math.round(element.getSize().getWidth()/2);
@@ -78,7 +81,7 @@ public class UIElements {
         int eleHeight = Math.round(element.getSize().getHeight()/2);
         if(y != null) eleHeight = y;
 
-        logInfo("INFO", "clickMousePosition :: [" + eleWidth + "," + eleHeight + "] ::[" + newXpath + "]", 1);
+        Utility.logInfo("INFO", "clickMousePosition :: [" + eleWidth + "," + eleHeight + "] ::[" + newXpath + "]", 1);
         Actions builder = new Actions(driver);
         //click on element
         switch(clickType) {
@@ -97,10 +100,10 @@ public class UIElements {
     }
 
     public static void dragAndDrop(String sourceXpath, String sourceDynamic, String targetXpath, String targetDynamic, Integer x, Integer y) {
-        String newSourceXpath = convertXpath(sourceXpath, sourceDynamic);
+        String newSourceXpath = Utility.convertXpath(sourceXpath, sourceDynamic);
         WebElement source = driver.findElement(By.xpath(newSourceXpath));
 
-        String newTargetXpath = convertXpath(targetXpath, targetDynamic);
+        String newTargetXpath = Utility.convertXpath(targetXpath, targetDynamic);
         WebElement target = driver.findElement(By.xpath(newTargetXpath));
 
         int eleWidth = Math.round(target.getSize().getWidth()/2);
@@ -109,7 +112,7 @@ public class UIElements {
         int eleHeight = Math.round(target.getSize().getHeight()/2);
         if(y != null) eleHeight = y;
 
-        logInfo("INFO", "dragAndDrop ::[" + newSourceXpath + "] to [" + newTargetXpath + "]:[" + eleWidth + "," + eleHeight + "]", 1);
+        Utility.logInfo("INFO", "dragAndDrop ::[" + newSourceXpath + "] to [" + newTargetXpath + "]:[" + eleWidth + "," + eleHeight + "]", 1);
         Actions builder = new Actions(driver);
         builder.clickAndHold(source).moveToElement(target, eleWidth, eleHeight).click().release(target).build().perform();
     }
@@ -126,7 +129,7 @@ public class UIElements {
     }
 
     public static void pressKeys(String keys) {
-        logInfo("INFO", "pressKeys :: [" + keys + "]", 1);
+        Utility.logInfo("INFO", "pressKeys :: [" + keys + "]", 1);
         Actions pressKey = new Actions(driver);
         pressKey.sendKeys(keys).build().perform();
     }
@@ -137,7 +140,7 @@ public class UIElements {
     }
 
     public static void typeKeysByRobot(String keys) {
-        logInfo("INFO", "typeKeysByRobot :: [" + keys + "]", 1);
+        Utility.logInfo("INFO", "typeKeysByRobot :: [" + keys + "]", 1);
         try {
             //copy keys to clipboard
             StringSelection stringSelection = new StringSelection(keys);
@@ -156,7 +159,7 @@ public class UIElements {
             robot.keyRelease(KeyEvent.VK_ENTER);
             Thread.sleep(2000);
         } catch (Exception e){
-            logInfo("ERROR", "typeKeysByRobot :: " + e.getMessage(), 1);
+            Utility.logInfo("ERROR", "typeKeysByRobot :: " + e.getMessage(), 1);
         }
     }
 
@@ -179,7 +182,7 @@ public class UIElements {
     }
     
     public static boolean isDisplayed(String strXpath, String dynamicValue) {
-        String newXpath = convertXpath(strXpath, dynamicValue);
+        String newXpath = Utility.convertXpath(strXpath, dynamicValue);
         boolean currentStatus = false;
         try {
             currentStatus = driver.findElement(By.xpath(newXpath)).isDisplayed();
@@ -190,9 +193,9 @@ public class UIElements {
     }
 
     public static void verifyElementPresent(String strXpath, String dynamicValue) {
-        String newXpath = convertXpath(strXpath, dynamicValue);
+        String newXpath = Utility.convertXpath(strXpath, dynamicValue);
         boolean bCurrentStatus = isDisplayed(strXpath, dynamicValue);
-        verifyValues("verifyElementPresent :: [" + newXpath + "]", String.valueOf(bCurrentStatus), "true", Enums.OPERATOR.equal);
+        Utility.verifyValues("verifyElementPresent :: [" + newXpath + "]", String.valueOf(bCurrentStatus), "true", Enums.OPERATOR.equal);
     }
 
     public static String getAttribute(String strXpath, String dynamicValue, String attribute) {
@@ -201,14 +204,14 @@ public class UIElements {
     }
 
     public static void verifyAttribute(String strXpath, String dynamicValue, String attribute, String expectedValue) {
-        String newXpath = convertXpath(strXpath, dynamicValue);
+        String newXpath = Utility.convertXpath(strXpath, dynamicValue);
         String currentValue = getAttribute(strXpath, dynamicValue, attribute);
-        verifyValues("verifyAttributeElement :: [" + attribute + "]:[" + newXpath + "]", currentValue, expectedValue, Enums.OPERATOR.equal);
+        Utility.verifyValues("verifyAttributeElement :: [" + attribute + "]:[" + newXpath + "]", currentValue, expectedValue, Enums.OPERATOR.equal);
     }
 
     public static List<String> getAttributeOnList(String strListXpath, String dynamicValue, String attribute) {
         List<String> returnValues = new ArrayList<String>();
-        String newXpath = convertXpath(strListXpath, dynamicValue);
+        String newXpath = Utility.convertXpath(strListXpath, dynamicValue);
         List<WebElement> wListRows = driver.findElements(By.xpath(newXpath));
         for(WebElement webElement : wListRows) {
             returnValues.add(webElement.getAttribute(attribute));
@@ -222,49 +225,50 @@ public class UIElements {
     }
 
     public static void verifyCssValue(String strXpath, String dynamicValue, String attribute, String expectedValue) {
-        String newXpath = convertXpath(strXpath, dynamicValue);
+        String newXpath = Utility.convertXpath(strXpath, dynamicValue);
         String currentValue = getCssValue(strXpath, dynamicValue, attribute);
-        verifyValues("verifyCssValue :: [" + attribute + "]:[" + newXpath + "]", currentValue, expectedValue, Enums.OPERATOR.equal);
+        Utility.verifyValues("verifyCssValue :: [" + attribute + "]:[" + newXpath + "]", currentValue, expectedValue, Enums.OPERATOR.equal);
     }
 
     public static int countItemsOnList(String strListXpath, String dynamicValue) {
-        String newXpath = convertXpath(strListXpath, dynamicValue);
+        String newXpath = Utility.convertXpath(strListXpath, dynamicValue);
         return driver.findElements(By.xpath(newXpath)).size();
     }
 
     public static void verifyTitle(String expectedTitle) {
         String actualTitle = driver.getTitle();
-        verifyValues("verifyTitle", actualTitle, expectedTitle, Enums.OPERATOR.equal);
+        Utility.verifyValues("verifyTitle", actualTitle, expectedTitle, Enums.OPERATOR.equal);
     }
 
     public static void navigateURL(String URL) {
-        logInfo("INFO", "navigateURL :: [" + URL + "]", 1);
+        Utility.logInfo("INFO", "navigateURL :: [" + URL + "]", 1);
         driver.get(URL);
         driver.manage().window().maximize();
     }
 
     public static void verifyURL(String expectedURL) {
         String actualURL = driver.getCurrentUrl();
-        verifyValues("verifyURL", actualURL, expectedURL, Enums.OPERATOR.equal);
+        Utility.verifyValues("verifyURL", actualURL, expectedURL, Enums.OPERATOR.equal);
     }
 
     public static void alertDialog(String action){
-        logInfo("INFO", "alertDialog :: [" + action + "]", 1);
+        Utility.logInfo("INFO", "alertDialog :: [" + action + "]", 1);
         if(action == "dismiss") driver.switchTo().alert().dismiss();
         else {
             driver.switchTo().alert().accept();
-            delay(2);
+            Utility.delay(2);
         }
     }
 
     public static String getAlertMessage(){
         String message = driver.switchTo().alert().getText();
-        logInfo("INFO", "getAlertMessage :: [" + message + "]", 0);
+        Utility.logInfo("INFO", "getAlertMessage :: [" + message + "]", 0);
         return message;
     }
 
     public static void closeDriver() {
         driver.close();
         driver.quit();
+        driver = null;
     }
 }

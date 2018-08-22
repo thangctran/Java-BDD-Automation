@@ -1,7 +1,5 @@
 package constains;
 
-import utilities.Enums;
-
 public class GolobalVariabes {
 
     public final static String urlBE = "https://www.phptravels.net/admin";
@@ -17,31 +15,4 @@ public class GolobalVariabes {
     public final static String urlCars = urlFE + "/cars";
     public final static String urlBlog = urlFE + "/blog";
     public final static String urlVisa = urlFE + "/ivisa";
-
-    public static String getXpathElement(Enums.ELEMENT_TYPE elementName) {
-        String returnXpath;
-        switch(elementName) {
-            case link:
-                returnXpath = "//a[//text()]";
-                break;
-            case checkbox:
-                returnXpath = "//*[./input[@type='checkbox'][//@*]]/ins";
-                break;
-            case textbox:
-                returnXpath = "//input[@*]";
-                break;
-            case radio:
-                returnXpath = "//*[./input[@type='radio'][//@*]]/ins";
-                break;
-            case dropdown:
-                returnXpath = "//select[//@*]";
-                break;
-            case table:
-                returnXpath = "//table[//@*]";
-                break;
-            default:
-                returnXpath = "//button[//text()]";
-        }
-        return returnXpath;
-    }
 }

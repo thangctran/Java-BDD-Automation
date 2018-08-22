@@ -1,0 +1,32 @@
+2018/08/23 01:35:46.850 [TESTCASE] FE001-Login - Login successful
+2018/08/23 01:35:46.866 [STEP] Navigate to url 'https://www.phptravels.net/'
+2018/08/23 01:35:46.913 [INFO] navigateURL :: [https://www.phptravels.net]
+2018/08/23 01:35:58.084 [STEP] Select MY ACCOUNT -> Login
+2018/08/23 01:35:58.282 [INFO] click :: [(//ul[contains(@*,'sidebar')])[last()]/li[.//*[contains(text(),'My Account')]]/a]
+2018/08/23 01:35:58.567 [INFO] click :: [//*[./*[@aria-expanded='true']]//li/a[text()=' Login']]
+2018/08/23 01:36:00.129 [STEP] Verify Login page is displayed
+2018/08/23 01:36:00.332 [PASSED] verifyTitle :: [Login] = [Login]
+2018/08/23 01:36:00.352 [PASSED] verifyURL :: [https://www.phptravels.net/login] = [https://www.phptravels.net/login]
+2018/08/23 01:36:00.361 [STEP] Click on 'LOGIN' button with valid email and password
+2018/08/23 01:36:00.429 [INFO] setText :: [user@phptravels.com] :: [//input[@placeholder='Email'][not(@id)]]
+2018/08/23 01:36:00.734 [INFO] setText :: [demouser] :: [//input[@name='password']]
+2018/08/23 01:36:00.900 [INFO] click :: [//button[@type='submit'][contains(@class,'btn-block l')]]
+2018/08/23 01:36:01.139 [STEP] Main page is displayed
+2018/08/23 01:36:08.811 [PASSED] verifyAttributeElement :: [textContent]:[//h3[@class='RTL']] :: [Hi, Johny Smith] = [Hi, Johny Smith]
+2018/08/23 01:36:08.892 [PASSED] verifyAttributeElement :: [innerText]:[//span[@class='h4']] :: [23 August 2018] = [23 August 2018]
+2018/08/23 01:36:09.038 [PASSED] verifyElementPresent :: [//ul[@class='nav profile-tabs']/li[./a[contains(.,'Bookings')]]] :: [true] = [true]
+2018/08/23 01:36:09.190 [PASSED] verifyElementPresent :: [//ul[@class='nav profile-tabs']/li[./a[contains(.,'My Profile')]]] :: [true] = [true]
+2018/08/23 01:36:09.310 [PASSED] verifyElementPresent :: [//ul[@class='nav profile-tabs']/li[./a[contains(.,'Wishlist')]]] :: [true] = [true]
+2018/08/23 01:36:09.406 [PASSED] verifyElementPresent :: [//ul[@class='nav profile-tabs']/li[./a[contains(.,'Newsletter')]]] :: [true] = [true]
+2018/08/23 01:36:09.484 [PASSED] verifyElementPresent :: [//ul[@class='nav profile-tabs' or @id='social-sidebar-menu']/li/a/*[@class='bookings-icon']] :: [true] = [true]
+2018/08/23 01:36:09.598 [PASSED] verifyElementPresent :: [//ul[@class='nav profile-tabs' or @id='social-sidebar-menu']/li/a/*[@class='profile-icon']] :: [true] = [true]
+2018/08/23 01:36:09.702 [PASSED] verifyElementPresent :: [//ul[@class='nav profile-tabs' or @id='social-sidebar-menu']/li/a/*[@class='wishlist-icon']] :: [true] = [true]
+2018/08/23 01:36:09.797 [PASSED] verifyElementPresent :: [//ul[@class='nav profile-tabs' or @id='social-sidebar-menu']/li/a/*[@class='newsletter-icon']] :: [true] = [true]
+2018/08/23 01:36:09.875 [PASSED] verifyAttributeElement :: [class]:[//ul[@class='nav profile-tabs']/li[./a[contains(.,'Bookings')]]] :: [active] = [active]
+2018/08/23 01:36:09.887 [TESTCASE] BE002-Login-Login to page unsuccessful
+2018/08/23 01:36:13.212 [STEP] Click on 'LOGIN' button with invalid format email and password
+2018/08/23 01:36:13.227 [INFO] navigateURL :: [https://www.phptravels.net/admin]
+2018/08/23 01:36:17.149 [INFO] setText :: [abc] :: [//input[@placeholder='Email'][not(@id)]]
+2018/08/23 01:36:17.320 [INFO] setText :: [invalid] :: [//input[@name='password']]
+2018/08/23 01:36:17.495 [INFO] click :: [//button[@type='submit'][contains(@class,'btn-block l')]]
+2018/08/23 01:36:18.594 [FAILED] verifyAttributeElement :: [textContent]:[//div[starts-with(@class,'alert')]/p] :: [The Email field must contain a valid email address.] = [The Email field must contain a valid email address.\n]

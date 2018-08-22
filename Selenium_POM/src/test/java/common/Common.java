@@ -2,45 +2,31 @@ package common;
 
 import java.util.List;
 import pages.BasePages;
-import utilities.Enums;
-import static constains.GolobalVariabes.getXpathElement;
+import constains.Controls;
 
 public class Common extends BasePages {
-    static String mnuMenuContent = "(//ul[contains(@*,'sidebar')])[last()]/li[.//*[contains(//text(),'')]]/a";
-    static String mnuSubMenu = "//*[./*[@aria-expanded='true']]//li/a[//text()]";
     static String sldPriceRange = "//div[@class='slider-track']";
     static String sldRound = "//div[@class='slider-handle round']";
     static String btnAddPhotos = "//a[@aria-controls='UploadPhotos']";
     static String lblDropFiles = "//span[@class='drop']";
     static String lstSearch = "//div[@class='xcrud-nav']//*[//text()][@class]";
     static String rdoStartGrade = "//*[./input[@name='stars']]";
-    static String tblTable = getXpathElement(Enums.ELEMENT_TYPE.table);
-    static String lnkLink = getXpathElement(Enums.ELEMENT_TYPE.link);
-    static String txtTextbox = getXpathElement(Enums.ELEMENT_TYPE.textbox);
-    static String ddlDropDownList = getXpathElement(Enums.ELEMENT_TYPE.dropdown);
-    static String chkCheckbox = getXpathElement(Enums.ELEMENT_TYPE.checkbox);
-    static String rdoRadio = getXpathElement(Enums.ELEMENT_TYPE.radio);
-    static String btnButton = getXpathElement(Enums.ELEMENT_TYPE.button);
 
-    public static void goToFuction(String mainMenu, String subMenu) {
-        click(mnuMenuContent, mainMenu);
-        if(subMenu != null) click(mnuSubMenu, subMenu);
-    }
 
     public static void deleteRowByButton(String rowIndex) {
-        selectCheckboxOnTable(tblTable, null,"1", rowIndex, true);
-        click(lnkLink, " Delete Selected");
+        selectCheckboxOnTable(Controls.table, null,"1", rowIndex, true);
+        click(Controls.link, " Delete Selected");
         alertDialog("accept");
     }
 
     public static void deleteRowByIcon(String rowIndex) {
-        clickIconOnTable(tblTable, null, rowIndex, "DELETE");
-        click(lnkLink, " Delete Selected");
+        clickIconOnTable(Controls.table, null, rowIndex, "DELETE");
+        click(Controls.link, " Delete Selected");
         alertDialog("accept");
     }
 
     public static void uploadGallery(String rowIndex, String imageUpload) {
-        clickCellOnTable(tblTable, null, "Gallery", rowIndex);
+        clickCellOnTable(Controls.table, null, "Gallery", rowIndex);
         click(btnAddPhotos, null);
         click(lblDropFiles, null);
         typeKeysByRobot(imageUpload);
@@ -49,8 +35,8 @@ public class Common extends BasePages {
     public static void searchOnRecordsOnTable(String text, String field) {
         scrollToElement(lstSearch, "Search");
         click(lstSearch, "Search");
-        setText(txtTextbox, "phrase", text);
-        selectOptionByText(ddlDropDownList, "column", field);
+        setText(Controls.textbox, "phrase", text);
+        selectOptionByText(Controls.dropdown, "column", field);
         click(lstSearch, "Go");
     }
 
@@ -71,16 +57,16 @@ public class Common extends BasePages {
         click(rdoStartGrade, startGrade);
         if(listPropertyTypes != null) {
             for(String itemType : listPropertyTypes) {
-                selectCheckbox(chkCheckbox, itemType, true);
+                selectCheckbox(Controls.checkbox, itemType, true);
             }
         }
         if(listAmenities != null) {
             for(String itemAmenities : listAmenities) {
-                selectCheckbox(chkCheckbox, itemAmenities, true);
+                selectCheckbox(Controls.checkbox, itemAmenities, true);
             }
         }
-        if(tour_Car_Type != null) click(rdoRadio, tour_Car_Type);
-        if(airportPickup != null) selectOptionByText(ddlDropDownList, "pickup" , airportPickup);
-        click(btnButton, "Search");
+        if(tour_Car_Type != null) click(Controls.radio, tour_Car_Type);
+        if(airportPickup != null) selectOptionByText(Controls.dropdown, "pickup" , airportPickup);
+        click(Controls.button, "Search");
     }
 }

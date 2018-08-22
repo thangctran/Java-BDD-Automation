@@ -9,6 +9,13 @@ import static utilities.Utility.isNumeric;
 import static utilities.Utility.verifyValues;
 
 public class BasePages extends UIElements {
+    static String mnuMenuContent = "(//ul[contains(@*,'sidebar')])[last()]/li[.//*[contains(//text(),'')]]/a";
+    static String mnuSubMenu = "//*[./*[@aria-expanded='true']]//li/a[//text()]";
+
+    public static void goToFuction(String mainMenu, String subMenu) {
+        click(mnuMenuContent, mainMenu);
+        if(subMenu != null) click(mnuSubMenu, subMenu);
+    }
 
     public static int countRows(String strTableXpath, String dynamicValue) {
         String newXpath = strTableXpath + "//tr";

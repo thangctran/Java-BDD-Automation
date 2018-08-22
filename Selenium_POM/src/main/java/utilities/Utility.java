@@ -2,11 +2,12 @@ package utilities;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import helpers.FileHelper;
 import org.testng.Assert;
-import static helpers.FileHelper.writeLogFile;
 
 public class Utility {
-    final static int logSetting = 1 ; // 1:info; 0:debug
+    final static int logSetting = Integer.parseInt(FileHelper.getXmlNodeValue("//Configuration/LogMode/text()",0)); // 1:info; 0:debug
     public static String getUnique(String formatDate) {
         // "E yyyy.MM.dd 'at' HH:mm:ss a zzz" => Sat 2018.08.11 at 05:09:21 PM UTC
         SimpleDateFormat ft = new SimpleDateFormat (formatDate);
@@ -25,7 +26,7 @@ public class Utility {
         if (logMode >= logSetting) {
             String logText = getUnique("yyyy/MM/dd HH:mm:ss.SSS") + " [" + logType + "] " + logs + "\n";
             System.out.print(logText);
-            writeLogFile(logText);
+            FileHelper.writeLogFile(logText);
         }
     }
     public static void delay(int seconds) {
