@@ -1,39 +1,13 @@
 package common;
 
 import elements.UIElements;
+import org.openqa.selenium.WebElement;
 import utilities.Enums;
 import java.util.ArrayList;
 import java.util.List;
 import static utilities.Utility.*;
 
 public class Common extends UIElements {
-
-    public static String getXpathElement(Enums.ELEMENT_TYPE elementName) {
-        String returnXpath;
-        switch(elementName) {
-            case link:
-                returnXpath = "//a[//text()]";
-                break;
-            case checkbox:
-                returnXpath = "//*[./input[@type='checkbox'][//@*]]/ins";
-                break;
-            case textbox:
-                returnXpath = "//input[@*]";
-                break;
-            case radio:
-                returnXpath = "//*[./input[@type='radio'][//@*]]/ins";
-                break;
-            case dropdown:
-                returnXpath = "//select[//@*]";
-                break;
-            case table:
-                returnXpath = "//table[//@*]";
-                break;
-            default:
-                returnXpath = "//button[//text()]";
-        }
-        return returnXpath;
-    }
 
     public static int countRows(String strTableXpath, String dynamicValue) {
         String newXpath = strTableXpath + "//tr";
@@ -61,7 +35,9 @@ public class Common extends UIElements {
     public static void clickCellOnTable(String strTableXpath, String dynamicValue, String column, String rowIndex) {
         String columnName = getColumnXpath(column);
         String newXpath = String.format("%s//tr[%s]/td[%s]//a]", strTableXpath, rowIndex, columnName);
-        click(newXpath, dynamicValue);
+        WebElement element = convertToElement("clickCellOnTable", newXpath, dynamicValue, 1);
+        element.click();
+//        click(newXpath, dynamicValue);
     }
 
     public static List<String> getCellValuesOnTable(String strTableXpath, String dynamicValue, String column, String rowIndex) {

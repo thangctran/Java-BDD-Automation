@@ -3,6 +3,7 @@ package utilities;
 import org.testng.Assert;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import static helpers.FileHelper.writeLogFile;
 
 public class Utility {
     final static int logSetting = 1 ; // 1:info; 0:debug
@@ -24,7 +25,7 @@ public class Utility {
         if (logMode >= logSetting) {
             String logText = getUnique("yyyy/MM/dd HH:mm:ss.SSS") + " [" + logType + "] " + logs + "\n";
             System.out.print(logText);
-//            writeLogFile(logText);
+            writeLogFile(logText);
         }
     }
     public static void delay(int seconds) {

@@ -3,6 +3,7 @@ package pages;
 import common.Common;
 import utilities.Enums;
 import java.util.List;
+import static constains.GolobalVariabes.getXpathElement;
 
 public class BasePages extends Common {
     static String mnuMenuContent = "(//ul[contains(@*,'sidebar')])[last()]/li[.//*[contains(//text(),'')]]/a";
@@ -21,8 +22,8 @@ public class BasePages extends Common {
     static String rdoRadio = getXpathElement(Enums.ELEMENT_TYPE.radio);
     static String btnButton = getXpathElement(Enums.ELEMENT_TYPE.button);
 
-    public static void goToFuction(String menuMain, String subMenu) {
-        click(mnuMenuContent, menuMain);
+    public static void goToFuction(String mainMenu, String subMenu) {
+        click(mnuMenuContent, mainMenu);
         if(subMenu != null) click(mnuSubMenu, subMenu);
     }
 
@@ -60,7 +61,7 @@ public class BasePages extends Common {
         }
     }
 
-    static void filerSearch(String startGrade, List<String> listPropertyTypes, List<String> listAmenities, String tour_Car_Type, String airportPickup ) {
+    public static void filerSearch(String startGrade, List<String> listPropertyTypes, List<String> listAmenities, String tour_Car_Type, String airportPickup ) {
         click(rdoStartGrade, startGrade);
         if(listPropertyTypes != null) {
             for(String itemType : listPropertyTypes) {

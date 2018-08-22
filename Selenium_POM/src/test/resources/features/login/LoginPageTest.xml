@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Login Page Test Suite" verbose="1" preserve-order="true" parallel="none">
+    <test name="Login BE Test" >
+        <classes>
+            <class name="testcases.LoginPageTest"/>
+            <methods>
+                <include name="FE001_Login" />
+                <!--<include name="test" />-->
+            </methods>
+        </classes>
+    </test>
+</suite>
