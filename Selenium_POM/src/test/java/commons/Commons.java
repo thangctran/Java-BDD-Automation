@@ -4,7 +4,7 @@ import java.util.List;
 import pages.BasePages;
 import constants.Controls;
 
-public class CommonMethods extends BasePages {
+public class Commons extends BasePages {
     
     static String sldPriceRange = "//div[@class='slider-track']";
     static String sldRound = "//div[@class='slider-handle round']";
@@ -13,16 +13,19 @@ public class CommonMethods extends BasePages {
     static String lstSearch = "//div[@class='xcrud-nav']//*[//text()][@class]";
     static String rdoStartGrade = "//*[./input[@name='stars']]";
 
-    public void deleteRowByButton(String rowIndex) {
+    public static String deleteRowByButton(String rowIndex, String columnName) {
         selectCheckboxOnTable(Controls.table, null,"1", rowIndex, true);
+        List<String> listName = getCellValuesOnTable(Controls.table, null, columnName, rowIndex);
         click(Controls.link, " Delete Selected");
         alertDialog("accept");
+        return listName.get(0);
     }
 
-    public static void deleteRowByIcon(String rowIndex) {
+    public static String deleteRowByIcon(String rowIndex, String columnName) {
+        List<String> listName = getCellValuesOnTable(Controls.table, null, columnName, rowIndex);
         clickIconOnTable(Controls.table, null, rowIndex, "DELETE");
-        click(Controls.link, " Delete Selected");
         alertDialog("accept");
+        return listName.get(0);
     }
 
     public static void uploadGallery(String rowIndex, String imageUpload) {
@@ -32,7 +35,7 @@ public class CommonMethods extends BasePages {
         typeKeysByRobot(imageUpload);
     }
 
-    public static void searchOnRecordsOnTable(String text, String field) {
+    public static void searchRecordsOnTable(String text, String field) {
         scrollToElement(lstSearch, "Search");
         click(lstSearch, "Search");
         setText(Controls.textbox, "phrase", text);

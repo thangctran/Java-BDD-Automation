@@ -219,6 +219,19 @@ public class UIElements {
         return returnValues;
     }
 
+    public static void verifyAttributeOnList(String strListXpath, String dynamicValue, String attribute, String expectedValue) {
+        String newXpath = Utility.convertXpath(strListXpath, dynamicValue);
+        List<WebElement> wListRows = driver.findElements(By.xpath(newXpath));
+        String checkValue = "match";
+        for(WebElement webElement : wListRows) {
+            if(webElement.getAttribute(attribute) != expectedValue) {
+                checkValue = "Not match";;
+                break;
+            }
+        }
+        Utility.verifyValues("verifyAttributeOnList :: [" + attribute + "]:[" + newXpath + "]", checkValue, "match", Enums.OPERATOR.equal);
+    }
+
     public static String getCssValue(String strXpath, String dynamicValue, String attribute) {
         WebElement element = convertToElement("getCssValue", strXpath, dynamicValue, 0);
         return element.getCssValue(attribute);
@@ -228,6 +241,19 @@ public class UIElements {
         String newXpath = Utility.convertXpath(strXpath, dynamicValue);
         String currentValue = getCssValue(strXpath, dynamicValue, attribute);
         Utility.verifyValues("verifyCssValue :: [" + attribute + "]:[" + newXpath + "]", currentValue, expectedValue, Enums.OPERATOR.equal);
+    }
+
+    public static void verifyCssValueOnList(String strListXpath, String dynamicValue, String attribute, String expectedValue) {
+        String newXpath = Utility.convertXpath(strListXpath, dynamicValue);
+        List<WebElement> wListRows = driver.findElements(By.xpath(newXpath));
+        String checkValue = "match";
+        for(WebElement webElement : wListRows) {
+            if(webElement.getCssValue(attribute) != expectedValue) {
+                checkValue = "Not match";;
+                break;
+            }
+        }
+        Utility.verifyValues("verifyCssValueOnList :: [" + attribute + "]:[" + newXpath + "]", checkValue, "match", Enums.OPERATOR.equal);
     }
 
     public static int countItemsOnList(String strListXpath, String dynamicValue) {

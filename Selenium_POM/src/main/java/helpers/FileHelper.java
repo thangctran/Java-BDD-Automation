@@ -132,7 +132,7 @@ public class FileHelper {
                 throw new Exception("Row 0 is used as header name, row index must start from 1");
             } else {
                 // Initiate test data location path
-                String strTestDataPath = Environemnts.TEST_PATH  + "\\data files\\" + strTestDataName;
+                String strTestDataPath = Environemnts.DATA_PATH  + "\\" + strTestDataName;
 
                 // Initiate column count variable
                 Integer iCol = 0;
@@ -202,11 +202,11 @@ public class FileHelper {
         // Initiate dictionary to contain returned values
         Map<String,String> dictTestDataRow = new HashMap<String, String>();
         try{
-            if (iRowIndex == 0) {
+            if (iRowIndex <= 0) {
                 throw new Exception("Row 0 is used as header name, row index must start from 1");
             } else {
                 // -define .csv file in app
-                String fileNameDefined = Environemnts.TEST_PATH  + "\\data files\\" + strCSVName;
+                String fileNameDefined = Environemnts.DATA_PATH  + "\\" + strCSVName;
 
                 //put data to map
                 String[] arrayHeader = getTextFile(fileNameDefined, 0).split(delimiter);

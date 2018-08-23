@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Hotels Management Page Test Suite" verbose="1" preserve-order="true" parallel="none">
+    <test name="Hotels Management Test" >
+        <classes>
+            <class name="tests.HotelsManagementTest"/>
+            <methods>
+                <include name="BE006_Hotels" />
+                <include name="BE007_Hotels" />
+                <include name="BE008_Hotels" />
+            </methods>
+        </classes>
+    </test>
+</suite>
