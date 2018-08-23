@@ -7,7 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.WebDriver;
-import constains.Environemnts;
+import constants.Environemnts;
 import helpers.FileHelper;
 
 public class SeleniumDrivers {

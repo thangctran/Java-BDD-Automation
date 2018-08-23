@@ -1,4 +1,4 @@
-package constains;
+package constants;
 
 public class GolobalVariabes {
 

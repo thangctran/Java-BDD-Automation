@@ -1,21 +1,13 @@
 package pages;
 
-import elements.UIElements;
-import org.openqa.selenium.WebElement;
-import utilities.Enums;
 import java.util.ArrayList;
 import java.util.List;
-import static utilities.Utility.isNumeric;
-import static utilities.Utility.verifyValues;
+import org.openqa.selenium.WebElement;
+import elements.UIElements;
+import utilities.Enums;
+import utilities.Utility;
 
 public class BasePages extends UIElements {
-    static String mnuMenuContent = "(//ul[contains(@*,'sidebar')])[last()]/li[.//*[contains(//text(),'')]]/a";
-    static String mnuSubMenu = "//*[./*[@aria-expanded='true']]//li/a[//text()]";
-
-    public static void goToFuction(String mainMenu, String subMenu) {
-        click(mnuMenuContent, mainMenu);
-        if(subMenu != null) click(mnuSubMenu, subMenu);
-    }
 
     public static int countRows(String strTableXpath, String dynamicValue) {
         String newXpath = strTableXpath + "//tr";
@@ -24,7 +16,7 @@ public class BasePages extends UIElements {
 
     static String getColumnXpath(String columnName){
         String column = columnName;
-        if(!isNumeric(columnName)) column = "count(//tr/th[text()='" + columnName + "']/preceding-sibling::th)+1";
+        if(!Utility.isNumeric(columnName)) column = "count(//tr/th[text()='" + columnName + "']/preceding-sibling::th)+1";
         return column;
     }
 
@@ -67,13 +59,13 @@ public class BasePages extends UIElements {
         if (rowIndex != null) {
             newXpath = String.format("%s//tr[%s]/td[%s]//i[@class='star fa fa-star']", strTableXpath, rowIndex, columnName);
             countStart = countItemsOnList(newXpath, dynamicValue);
-            verifyValues("verifyStartOnTable :: [" + newXpath + "]", String.valueOf(countStart), String.valueOf(expectedStart), Enums.OPERATOR.equal);
+            Utility.verifyValues("verifyStartOnTable :: [" + newXpath + "]", String.valueOf(countStart), String.valueOf(expectedStart), Enums.OPERATOR.equal);
         } else {
             int rows = countRows(strTableXpath, dynamicValue);
             for(int n=1; n<= rows; n++){
                 newXpath = String.format("%s//tr[%d]/td[%s]//i[@class='star fa fa-star']", strTableXpath, n, columnName);
                 countStart = countItemsOnList(newXpath, dynamicValue);
-                verifyValues("verifyStartOnTable :: at row [" + n + "]", String.valueOf(countStart), String.valueOf(expectedStart), Enums.OPERATOR.greaterThanOrEqual);
+                Utility.verifyValues("verifyStartOnTable :: at row [" + n + "]", String.valueOf(countStart), String.valueOf(expectedStart), Enums.OPERATOR.greaterThanOrEqual);
             }
         }
     }

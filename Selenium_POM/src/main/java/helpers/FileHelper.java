@@ -27,27 +27,54 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
-import constains.Environemnts;
+import constants.Environemnts;
 import utilities.Utility;
 
 public class FileHelper {
-    public final static String LOG_FILE = Environemnts.TEST_PATH + "\\reports\\LogDetail_" + Utility.getUnique("yyMMddHHmmss")+ ".txt";
+    public final static String LOG_FILE = Environemnts.TEST_PATH + "\\reports\\LogDetail_" + Utility.getUnique("yyMMddHHmmss") + ".txt";
 
-    public static void writeLogFile(String strTextContent){
+    public static void writeTextFile(String strFileLocation, String strTextContent){
         try {
             // Define charset to format text content before setting to txt file
             Charset utf8 = StandardCharsets.UTF_8;
 
             // Define text file location path
-            String strTextFileLocation = LOG_FILE;
-            Path FILEPATH = Paths.get(strTextFileLocation);
+            Path path = Paths.get(strFileLocation);
 
             // Writing to the expected txt file
-            Files.write(FILEPATH,strTextContent.getBytes(utf8),StandardOpenOption.CREATE,
+            Files.write(path,strTextContent.getBytes(utf8),StandardOpenOption.CREATE,
                         StandardOpenOption.APPEND);
         } catch (IOException e) {
             System.out.println(Utility.getUnique("yyyy/MM/dd HH:mm:ss.SSS") + " [ERROR] " + e.toString());
         }
+    }
+
+    public static void writeLogFile(String strTextContent){
+        writeTextFile(LOG_FILE, strTextContent);
+    }
+
+    public static String getTextFile(String strFileLocation, Integer rowIndex) {
+        String strReturnText = "";
+        try {
+            // Define charset to format text content before setting to txt file
+            Charset utf8 = StandardCharsets.UTF_8;
+
+            // Define text file location path
+            Path path = Paths.get(strFileLocation);
+
+            // Read all lines in text file
+            List<String> strLines = Files.readAllLines(path, utf8);
+            if (rowIndex != null) strReturnText = strLines.get(rowIndex);
+            else {
+                // Convert List item to string
+                for (String line : strLines) {
+                    strReturnText += line + "\n";
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return strReturnText;
     }
 
     public static String getXmlNodeValue(String strXMLNodeXpath, int intIndex){
@@ -91,15 +118,15 @@ public class FileHelper {
             // Print out the returned value
             returnedValue = list.get(intIndex);
         } catch (Exception e) {
-            System.out.println(Utility.getUnique("yyyy/MM/dd HH:mm:ss.SSS") + " [ERROR] " + e.toString());
+            e.printStackTrace();
         }
         return returnedValue;
     }
 
-    public static Map<String,String> getTestDataRow(String strTestDataName, String strSheetName, Integer iRowIndex) {
+    public static Map<String,String> getTestDataRow(String strTestDataName, String strSheetName, int iRowIndex) {
         // Initiate dictionary to contain returned values
         Map<String,String> dictTestDataRow = new HashMap<String, String>();
-        Integer iRow = iRowIndex;
+        int iRow = iRowIndex;
         try{
             if (iRow == 0) {
                 throw new Exception("Row 0 is used as header name, row index must start from 1");
@@ -159,14 +186,37 @@ public class FileHelper {
                                     break;
                             }
                     }
-                    dictTestDataRow.put(strHeader, strCellValue.toString());
+                    dictTestDataRow.put(strHeader, strCellValue);
                     iCol++;
                     rHeaderRows = sheet.getRow(0);
                     cHeaderCell = rHeaderRows.getCell(iCol);
                 }
             }
         } catch (Exception e) {
-            System.out.println(Utility.getUnique("yyyy/MM/dd HH:mm:ss.SSS") + " [ERROR] " + e.toString());
+            e.printStackTrace();
+        }
+        return dictTestDataRow;
+    }
+
+    public static Map<String,String> getTestDataCSV(String strCSVName, String delimiter,  int iRowIndex) {
+        // Initiate dictionary to contain returned values
+        Map<String,String> dictTestDataRow = new HashMap<String, String>();
+        try{
+            if (iRowIndex == 0) {
+                throw new Exception("Row 0 is used as header name, row index must start from 1");
+            } else {
+                // -define .csv file in app
+                String fileNameDefined = Environemnts.TEST_PATH  + "\\data files\\" + strCSVName;
+
+                //put data to map
+                String[] arrayHeader = getTextFile(fileNameDefined, 0).split(delimiter);
+                String[] arrayCellValue = getTextFile(fileNameDefined, iRowIndex).split(delimiter);
+                for(int i=0; i< arrayHeader.length; i++){
+                    dictTestDataRow.put(arrayHeader[i], arrayCellValue[i]);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return dictTestDataRow;
     }

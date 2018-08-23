@@ -1,10 +1,11 @@
-package common;
+package commons;
 
 import java.util.List;
 import pages.BasePages;
-import constains.Controls;
+import constants.Controls;
 
-public class Common extends BasePages {
+public class CommonMethods extends BasePages {
+    
     static String sldPriceRange = "//div[@class='slider-track']";
     static String sldRound = "//div[@class='slider-handle round']";
     static String btnAddPhotos = "//a[@aria-controls='UploadPhotos']";
@@ -12,8 +13,7 @@ public class Common extends BasePages {
     static String lstSearch = "//div[@class='xcrud-nav']//*[//text()][@class]";
     static String rdoStartGrade = "//*[./input[@name='stars']]";
 
-
-    public static void deleteRowByButton(String rowIndex) {
+    public void deleteRowByButton(String rowIndex) {
         selectCheckboxOnTable(Controls.table, null,"1", rowIndex, true);
         click(Controls.link, " Delete Selected");
         alertDialog("accept");

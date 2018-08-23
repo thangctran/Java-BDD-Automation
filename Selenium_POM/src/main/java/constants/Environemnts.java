@@ -1,6 +1,4 @@
-package constains;
-
-import static utilities.Utility.getUnique;
+package constants;
 
 public class Environemnts {
     public final static String PROJECT_PATH = System.getProperty("user.dir");

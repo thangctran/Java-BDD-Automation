@@ -5,11 +5,11 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-import constains.GolobalVariabes;
+import constants.GolobalVariabes;
 import drivers.SeleniumDrivers;
 import elements.UIElements;
 import helpers.FileHelper;
-import pages.BasePages;
+import pages.MainPage;
 import pages.fe.MyAccountPage;
 import pages.LoginPage;
 import utilities.Utility;
@@ -30,14 +30,14 @@ public class LoginTest {
     public void FE001_LoginFE() {
         Utility.logInfo("TESTCASE","FE001-Login - Login successful", 1);
         Utility.logInfo("STEP","Navigate to url 'https://www.phptravels.net/'", 1);
-        BasePages.navigateURL(GolobalVariabes.urlFE);
+        MainPage.navigateURL(GolobalVariabes.urlFE);
 
         Utility.logInfo("STEP", "Select MY ACCOUNT -> Login", 1);
-        BasePages.goToFuction("My Account", " Login");
+        MainPage.goToFuction("My Account", " Login");
 
         Utility.logInfo("STEP", "Verify Login page is displayed", 1);
-        BasePages.verifyTitle("Login");
-        BasePages.verifyURL(GolobalVariabes.urlLogin);
+        MainPage.verifyTitle("Login");
+        MainPage.verifyURL(GolobalVariabes.urlLogin);
 
         Utility.logInfo("STEP","Click on 'LOGIN' button with valid email and password", 1);
         LoginPage.login(null, GolobalVariabes.emailFE, GolobalVariabes.passwordFE);
