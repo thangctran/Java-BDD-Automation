@@ -26,9 +26,7 @@ public class HotelsManagementTest {
 
     @Test(priority = 0, description = "BE006-Hotels-Upload gallery")
     public void BE006_Hotels() {
-        Utility.logInfo("TESTCASE", "BE006-Hotels-Upload gallery", 1);
-
-        //set variables
+          //set variables
         String rowIndex = String.valueOf(Utility.getRandomInt(1,9));
         String imageUpload = Environemnts.DATA_PATH + "\\Image.PNG";
 
@@ -36,14 +34,14 @@ public class HotelsManagementTest {
         LoginPage.login(GolobalVariabes.urlBE, GolobalVariabes.emailBE, GolobalVariabes.passwordBE);
 
         Utility.logInfo("STEP", "Select HOTELS -> HOTELS", 1);
-        MainPage.goToFuction("Hotels", "Hotels");
+        MainPage.goToFunction("Hotels", "Hotels");
 
         Utility.logInfo("STEP", "Upload image to a Hotel record", 1);
         int imageNumberBefore = HotelsManagementPage.getImageNumberUpload(rowIndex);
         HotelsManagementPage.uploadGallery(rowIndex, imageUpload);
 
         Utility.logInfo("STEP", "Go to Hotels Management again", 1);
-        MainPage.goToFuction("Hotels", "Hotels");
+        MainPage.goToFunction("Hotels", "Hotels");
 
         Utility.logInfo("STEP", "Verify image is uploaded for this hotel", 1);
         HotelsManagementPage.verifyImageNumberUploaded(rowIndex, imageNumberBefore + 1);
@@ -51,8 +49,6 @@ public class HotelsManagementTest {
 
     @Test(priority = 0, description = "BE007-Hotels-Delete Hotels by icon")
     public void BE007_Hotels() {
-        Utility.logInfo("TESTCASE", "BE007-Hotels-Delete Hotels by icon", 1);
-
         //set variables
         String rowIndex = String.valueOf(Utility.getRandomInt(1, 9));
 
@@ -68,8 +64,6 @@ public class HotelsManagementTest {
 
     @Test(priority = 0, description = "BE008-Hotels-Delete Hotels by Delete Selected button")
     public void BE008_Hotels() {
-        Utility.logInfo("TESTCASE", "BE008-Hotels-Delete Hotels by Delete Selected button", 1);
-
         //set variables
         String rowIndex = String.valueOf(Utility.getRandomInt(1, 9));
 

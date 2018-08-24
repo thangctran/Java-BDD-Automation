@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Login Page Test Suite" verbose="1" preserve-order="true" parallel="none">
+    <listeners>
+        <listener class-name="utilities.InitTestSuite" />
+    </listeners>
     <test name="Login Test" >
         <classes>
             <class name="tests.LoginTest"/>
             <methods>
                 <include name="FE001_LoginFE" />
+                <include name="BE001_LoginBE" />
                 <include name="BE002_LoginBE" />
             </methods>
         </classes>

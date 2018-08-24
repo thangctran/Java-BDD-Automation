@@ -21,6 +21,7 @@ import utilities.Enums;
 
 public class UIElements {
 //    static final WebDriver driver = SeleniumDrivers.setSeleniumDrivers();
+
     private static WebDriver driver;
     public static void setDriver(WebDriver driverTest) {
         if (driver == null) driver = driverTest;
@@ -199,12 +200,12 @@ public class UIElements {
 
     public static String getAttribute(String strXpath, String dynamicValue, String attribute) {
         WebElement element = convertToElement("getAttribute", strXpath, dynamicValue, 0);
-        return element.getAttribute(attribute);
+        return element.getAttribute(attribute).trim();
     }
 
     public static void verifyAttribute(String strXpath, String dynamicValue, String attribute, String expectedValue) {
         String newXpath = Utility.convertXpath(strXpath, dynamicValue);
-        String currentValue = getAttribute(strXpath, dynamicValue, attribute);
+        String currentValue = getAttribute(strXpath, dynamicValue, attribute).trim();
         Utility.verifyValues("verifyAttributeElement :: [" + attribute + "]:[" + newXpath + "]", currentValue, expectedValue, Enums.OPERATOR.equal);
     }
 
@@ -295,7 +296,29 @@ public class UIElements {
         driver.close();
         driver.quit();
         driver = null;
-        driver.manage().deleteAllCookies();
+    }
+
+    public static void switchToWindowTitle(String title) {
+        Utility.logInfo("INFO", "switchToWindowTitle :: [" + title + "]", 1);
+        try{
+            String currentWindow = driver.getWindowHandle();
+            boolean bFind = false;
+            for(int i=driver.getWindowHandles().size() - 1; i>=0 ; i--){
+                driver.switchTo().window(driver.getWindowHandles().toArray()[i].toString());
+                if (title.equals(driver.getTitle())){
+                    bFind = true;
+                    break;
+                }
+            }
+            if(!bFind) driver.switchTo().window(title);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void switchToDefaultContent() {
+        Utility.logInfo("INFO", "switchToDefaultContent ", 0);
+        driver.switchTo().defaultContent();
     }
 
     public static void clearCookies() {
@@ -308,7 +331,7 @@ public class UIElements {
             File srcFile = scrShot.getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(srcFile, new File(pathFileName));
         } catch (Exception e)  {
-            Utility.logInfo("ERROR", e.getMessage(), 1);
+            e.printStackTrace();
         }
     }
 }

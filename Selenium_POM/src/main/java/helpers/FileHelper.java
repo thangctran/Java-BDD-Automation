@@ -31,7 +31,7 @@ import constants.Environemnts;
 import utilities.Utility;
 
 public class FileHelper {
-    public final static String LOG_FILE = Environemnts.TEST_PATH + "\\reports\\LogDetail_" + Utility.getUnique("yyMMddHHmmss") + ".txt";
+    public final static String LOG_FILE = Environemnts.REPORTS_PATH + "LogDetail_" + Utility.getUnique("yyMMddHHmmss") + ".txt";
 
     public static void writeTextFile(String strFileLocation, String strTextContent){
         try {
@@ -206,7 +206,7 @@ public class FileHelper {
                 throw new Exception("Row 0 is used as header name, row index must start from 1");
             } else {
                 // -define .csv file in app
-                String fileNameDefined = Environemnts.DATA_PATH  + "\\" + strCSVName;
+                String fileNameDefined = Environemnts.DATA_PATH  + strCSVName;
 
                 //put data to map
                 String[] arrayHeader = getTextFile(fileNameDefined, 0).split(delimiter);

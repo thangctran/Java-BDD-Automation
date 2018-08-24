@@ -5,6 +5,7 @@ public class GolobalVariabes {
     public final static String urlBE = "https://www.phptravels.net/admin";
     public final static String emailBE = "admin@phptravels.com";
     public final static String passwordBE = "demoadmin";
+    public final static String userBEName = "Super Admin Admin";
     public final static String urlFE = "https://www.phptravels.net";
     public final static String urlLogin = "https://www.phptravels.net/login";
     public final static String emailFE = "user@phptravels.com";
