@@ -4,18 +4,17 @@ import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.openqa.selenium.By;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import utilities.Utility;
 import utilities.Enums;
@@ -296,5 +295,20 @@ public class UIElements {
         driver.close();
         driver.quit();
         driver = null;
+        driver.manage().deleteAllCookies();
+    }
+
+    public static void clearCookies() {
+        driver.manage().deleteAllCookies();
+    }
+
+    public static void captureScreen(String pathFileName) {
+        try {
+            TakesScreenshot scrShot = ((TakesScreenshot) driver);
+            File srcFile = scrShot.getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(srcFile, new File(pathFileName));
+        } catch (Exception e)  {
+            Utility.logInfo("ERROR", e.getMessage(), 1);
+        }
     }
 }
