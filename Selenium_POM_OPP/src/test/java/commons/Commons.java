@@ -1,12 +1,9 @@
 package commons;
 
 import java.util.List;
+import keywords.WebUI;
 import pages.BasePages;
 import constants.Controls;
-import drivers.KWDriver;
-import utilities.Enums.METHOD_ELEMENT;
-import utilities.Enums.METHOD_DRIVER;
-import utilities.Utility;
 
 public class Commons extends BasePages {
     final static String txtEmail = "//input[@placeholder='Email'][not(@id)]";
@@ -20,7 +17,7 @@ public class Commons extends BasePages {
     final static String rdoStartGrade = "//*[./input[@name='stars']]";
 
     public static void login(String url, String email, String password) {
-        if(url != null) KWDriver.action(METHOD_DRIVER.get, url).get(url);
+        if(url != null) WebUI.navigateURL(url);
         if(email != null)setText(txtEmail, null, email);
         if(password != null) setText(txtPassword, null, password);
         click(btnLogin, null);
@@ -30,24 +27,21 @@ public class Commons extends BasePages {
         selectCheckboxOnTable(Controls.table, null,"1", rowIndex, true);
         List<String> listName = getCellValuesOnTable(Controls.table, null, columnName, rowIndex);
         click(Controls.link, " Delete Selected");
-        KWDriver.action(METHOD_DRIVER.acceptAlert, null).switchTo().alert().accept();
-        Utility.delay(2);
+        WebUI.acceptAlert();
         return listName.get(0);
     }
 
     public static String deleteRowByIcon(String rowIndex, String columnName) {
         List<String> listName = getCellValuesOnTable(Controls.table, null, columnName, rowIndex);
         clickIconOnTable(Controls.table, null, rowIndex, "DELETE");
-        KWDriver.action(METHOD_DRIVER.acceptAlert, null).switchTo().alert().accept();
-        Utility.delay(2);
+        WebUI.acceptAlert();
         return listName.get(0);
     }
 
     public static void uploadGallery(String rowIndex, String imageUpload) {
         clickCellOnTable(Controls.table, null, "Gallery", rowIndex);
         click(btnAddPhotos, null);
-        click(lblDropFiles, null);
-        typeKeysByRobot(imageUpload);
+        WebUI.upLoadFile(lblDropFiles, null, imageUpload);
     }
 
     public static void searchRecordsOnTable(String text, String field) {
@@ -59,7 +53,7 @@ public class Commons extends BasePages {
     }
 
     public static void setPriceRange(Integer from, Integer to) {
-        int sliderWidth = action(METHOD_ELEMENT.getWidth, null, sldPriceRange, null).getSize().getWidth();
+        int sliderWidth = WebUI.getHeight(sldPriceRange, null);
         int posi = 0;
         if(from != null){
             posi = (int)(sliderWidth * from / 100);

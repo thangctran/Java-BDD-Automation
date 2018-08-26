@@ -1,6 +1,7 @@
 package tests;
 
-import drivers.KWDriver;
+import drivers.Driver;
+import keywords.WebUI;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
@@ -13,14 +14,15 @@ import pages.be.MainBEPage;
 import utilities.Utility;
 
 public class HotelsManagementTest {
+
     @BeforeSuite
     public void startTestSuite(){
-        KWDriver.setDriver(KWDriver.setSeleniumDrivers());
+        Driver.setDriver(Driver.setSeleniumDrivers());
     }
 
     @AfterSuite
     public void endTestSuite(){
-        KWDriver.closeDriver();
+        WebUI.closeDriver();
     }
 
     @Test(priority = 0, description = "BE006-Hotels-Upload gallery")

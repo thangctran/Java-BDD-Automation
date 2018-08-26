@@ -3,7 +3,6 @@ package pages.fe;
 import pages.BasePages;
 import utilities.Utility;
 
-
 public class MyAccountPage extends BasePages {
     final static String lblUserName = "//h3[@class='RTL']";
     final static String lblCurrentDay = "//span[@class='h4']";

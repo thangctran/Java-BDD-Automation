@@ -1,20 +1,19 @@
 package drivers;
 
 import java.util.concurrent.TimeUnit;
-
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.safari.SafariDriver;
-
-import utilities.Enums;
-import utilities.Utility;
 import constants.Environemnts;
 import helpers.FileHelper;
+import utilities.Utility;
 
-public class KWDriver{
+public class Driver {
     static WebDriver driver;
 
     public static void setDriver(WebDriver driverTest) {
@@ -22,13 +21,6 @@ public class KWDriver{
     }
 
     public static WebDriver getDriver() {
-        return driver;
-    }
-
-    public static WebDriver action(Enums.METHOD_DRIVER actionName, String description){
-        String tempDescription = "";
-        if(description != null) tempDescription = " [" + description + "] ";
-        Utility.logInfo("INFO", String.format("Driver: %s ::%s", actionName.toString(), tempDescription), 1);
         return driver;
     }
 
@@ -68,37 +60,16 @@ public class KWDriver{
         return driverTest;
     }
 
-    public static void verifyTitle(String expectedTitle) {
-        String actualTitle = driver.getTitle();
-        Utility.verifyValues("KWDriver: verifyTitle", actualTitle, expectedTitle, Enums.OPERATOR.equal);
-    }
-
-    public static void verifyURL(String expectedURL) {
-        String actualURL = driver.getCurrentUrl();
-        Utility.verifyValues("KWDriver: verifyURL", actualURL, expectedURL, Enums.OPERATOR.equal);
-    }
-
-    public static void switchToWindowTitle(String title) {
-        Utility.logInfo("INFO", "KWDriver: switchToWindowTitle :: [" + title + "]", 1);
-        try{
-            boolean bFind = false;
-            for(int i=driver.getWindowHandles().size() - 1; i>=0 ; i--){
-                driver.switchTo().window(driver.getWindowHandles().toArray()[i].toString());
-                if (title.equals(driver.getTitle())){
-                    bFind = true;
-                    break;
-                }
-            }
-            if(!bFind) driver.switchTo().window(title);
-        } catch (Exception e) {
-            e.printStackTrace();
+    public static WebElement webElement(String description, String strXpath, String dynamicValue){
+        WebElement element;
+        String newXpath = Utility.convertXpath(strXpath, dynamicValue);
+        try {
+            Utility.logInfo("INFO", String.format("%s :: [%s]", description, newXpath), 1);
+            element = driver.findElement(By.xpath(newXpath));
+        } catch (Exception e){
+            Utility.logInfo("ERROR", String.format("%s :: Not Found[%s]", description, newXpath), 1);
+            return null;
         }
-    }
-
-    public static void closeDriver() {
-        Utility.logInfo("INFO", "KWDriver: closeDriver", 1);
-        driver.close();
-        driver.quit();
-        driver = null;
+        return element;
     }
 }

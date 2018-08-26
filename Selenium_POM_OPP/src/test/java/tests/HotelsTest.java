@@ -3,26 +3,25 @@ package tests;
 import java.util.Arrays;
 import java.util.List;
 
-
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import constants.GolobalVariabes;
-import drivers.KWDriver;
 import pages.fe.HotelsPage;
-import utilities.Enums;
+import drivers.Driver;
+import keywords.WebUI;
 import utilities.Utility;
 
 public class HotelsTest {
     @BeforeSuite
     public void startTestSuite(){
-        KWDriver.setDriver(KWDriver.setSeleniumDrivers());
+        Driver.setDriver(Driver.setSeleniumDrivers());
     }
 
     @AfterSuite
     public void endTestSuite(){
-        KWDriver.closeDriver();
+        WebUI.closeDriver();
     }
 
     @Test(priority = 0, description = "FE005-Hotels - Verify Hotel Filter")
@@ -34,7 +33,7 @@ public class HotelsTest {
         List<String> listAmenities = Arrays.asList("Night Club", "Restaurant");
 
         Utility.logInfo("STEP", "Navigate to url 'https://www.phptravels.net/hotels'", 1);
-        KWDriver.action(Enums.METHOD_DRIVER.get, null).get(GolobalVariabes.urlHotels);
+        WebUI.navigateURL(GolobalVariabes.urlHotels);
 
         Utility.logInfo("STEP", " Price range: From 0 to 40", 1);
         HotelsPage.setPriceRange(0, 40);

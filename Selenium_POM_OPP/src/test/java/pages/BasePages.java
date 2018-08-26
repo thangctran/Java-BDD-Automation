@@ -2,19 +2,11 @@ package pages;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.openqa.selenium.WebElement;
-import elements.KWElement;
+import keywords.WebUI;
 import utilities.Enums;
 import utilities.Utility;
 
-public class BasePages extends KWElement {
-    public static void click(String strXpath, String dynamicValue) {
-        action(Enums.METHOD_ELEMENT.click, null, strXpath, dynamicValue).click();
-    }
-
-    public static void setText(String strXpath, String dynamicValue, String value) {
-        action(Enums.METHOD_ELEMENT.sendKeys, value, strXpath, dynamicValue).sendKeys(value);
-    }
+public class BasePages extends WebUI {
 
     public static int countRows(String strTableXpath, String dynamicValue) {
         String newXpath = strTableXpath + "//tr";
@@ -35,15 +27,13 @@ public class BasePages extends KWElement {
 
     public static void clickIconOnTable(String strTableXpath, String dynamicValue, String rowIndex, String icon) {
         String newXpath = String.format("%s//tr[%s]/td//a[@title='%s']", strTableXpath, rowIndex, icon);
-        WebElement element = convertToElement("clickIconOnTable", newXpath, dynamicValue, 1);
-        element.click();
+        webElement("clickIconOnTable", newXpath, dynamicValue).click();
     }
 
     public static void clickCellOnTable(String strTableXpath, String dynamicValue, String column, String rowIndex) {
         String columnName = getColumnXpath(column);
         String newXpath = String.format("%s//tr[%s]/td[%s]//a", strTableXpath, rowIndex, columnName);
-        WebElement element = convertToElement("clickCellOnTable", newXpath, dynamicValue, 1);
-        element.click();
+        webElement("clickCellOnTable", newXpath, dynamicValue).click();
     }
 
     public static List<String> getCellValuesOnTable(String strTableXpath, String dynamicValue, String column, String rowIndex) {

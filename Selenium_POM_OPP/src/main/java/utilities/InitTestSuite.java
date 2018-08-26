@@ -3,8 +3,7 @@ package utilities;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 import constants.Environemnts;
-import drivers.KWDriver;
-import elements.KWElement;
+import keywords.WebUI;
 import helpers.FileHelper;
 
 public class InitTestSuite extends TestListenerAdapter{
@@ -19,7 +18,7 @@ public class InitTestSuite extends TestListenerAdapter{
     public void onTestFailure(ITestResult itr) {
         String captureImage = FileHelper.getXmlNodeValue("//Configuration/CaptureImage/text()",0);
         if(captureImage.toLowerCase() != "false") {
-            KWElement.captureScreen(Environemnts.REPORTS_PATH + "images\\" + itr.getName() + "_" + Utility.getUnique("yyMMdd_HHmmss") + ".png");
+            WebUI.captureScreen(Environemnts.REPORTS_PATH + "images\\" + itr.getName() + "_" + Utility.getUnique("yyMMdd_HHmmss") + ".png");
         }
         onTestEnd(itr);
     }
@@ -29,7 +28,7 @@ public class InitTestSuite extends TestListenerAdapter{
     public void onTestSkipped(ITestResult itr) {
         String captureImage = FileHelper.getXmlNodeValue("//Configuration/CaptureImage/text()",0);
         if(captureImage.toLowerCase() != "false") {
-            KWElement.captureScreen(Environemnts.REPORTS_PATH + "images\\" + itr.getName() + "_" + Utility.getUnique("yyMMdd_HHmmss") + ".png");
+            WebUI.captureScreen(Environemnts.REPORTS_PATH + "images\\" + itr.getName() + "_" + Utility.getUnique("yyMMdd_HHmmss") + ".png");
         }
         onTestEnd(itr);
     }
@@ -42,7 +41,7 @@ public class InitTestSuite extends TestListenerAdapter{
 
     // Override to custom onTestEnd function of TestNG
     public void onTestEnd(ITestResult itr) {
-        KWDriver.action(Enums.METHOD_DRIVER.deleteAllCookies, null).manage().deleteAllCookies();
+        WebUI.deleteAllCookies();
         Utility.logInfo("TESTCASE","*** End TestCase: " + itr.getName() + " ***", 1);
     }
 }

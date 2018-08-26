@@ -1,42 +1,44 @@
 package tests;
 
 import java.util.Map;
+
+
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import constants.GolobalVariabes;
-import drivers.KWDriver;
+import drivers.Driver;
+import keywords.WebUI;
 import helpers.FileHelper;
 import pages.be.MainBEPage;
 import pages.be.LoginBEPage;
 import pages.fe.MyAccountPage;
-import utilities.Enums;
 import utilities.Utility;
 
 public class LoginTest {
 
     @BeforeSuite
     public void startTestSuite(){
-        KWDriver.setDriver(KWDriver.setSeleniumDrivers());
+        Driver.setDriver(Driver.setSeleniumDrivers());
     }
 
     @AfterSuite
     public void endTestSuite(){
-        KWDriver.closeDriver();
+        WebUI.closeDriver();
     }
 
     @Test(priority = 0, description = "FE001-Login - Login successful")
     public void FE001_LoginFE() {
         Utility.logInfo("STEP","Navigate to url 'https://www.phptravels.net/'", 1);
-        KWDriver.action(Enums.METHOD_DRIVER.get, GolobalVariabes.urlFE).get(GolobalVariabes.urlFE);
+        WebUI.navigateURL(GolobalVariabes.urlFE);
 
         Utility.logInfo("STEP", "Select MY ACCOUNT -> Login", 1);
         MainBEPage.goToFunction("My Account", " Login");
 
         Utility.logInfo("STEP", "Verify Login page is displayed", 1);
-        KWDriver.verifyTitle("Login");
-        KWDriver.verifyURL(GolobalVariabes.urlLogin);
+        WebUI.verifyTitle("Login");
+        WebUI.verifyURL(GolobalVariabes.urlLogin);
 
         Utility.logInfo("STEP","Click on 'LOGIN' button with valid email and password", 1);
         LoginBEPage.login(null, GolobalVariabes.emailFE, GolobalVariabes.passwordFE);
