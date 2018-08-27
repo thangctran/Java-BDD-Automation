@@ -1,5 +1,6 @@
 package pages.fe;
 
+import keywords.WebUI;
 import pages.BasePages;
 import utilities.Utility;
 
@@ -11,23 +12,23 @@ public class MyAccountPage extends BasePages {
     final static String btnInvoice = "//div[@class='row'][.//span[@class='grey'][contains(//.,'')]]//a[text()='Invoice']";
 
     public static void verifyMyAccountPage(String userName) {
-        verifyAttribute(lblUserName, null, "textContent", "Hi, " + userName);
-        verifyAttribute(lblCurrentDay, null, "innerText", Utility.getUnique("d MMMM yyyy"));
+        WebUI.verifyAttribute(lblUserName, null, "textContent", "Hi, " + userName);
+        WebUI.verifyAttribute(lblCurrentDay, null, "innerText", Utility.getUnique("d MMMM yyyy"));
         // verify Bookings; My Profile; Wishlist; Newsletter label
-        verifyElementPresent(lblMenuBar, "Bookings");
-        verifyElementPresent(lblMenuBar, "My Profile");
-        verifyElementPresent(lblMenuBar, "Wishlist");
-        verifyElementPresent(lblMenuBar, "Newsletter");
+        WebUI.verifyElementPresent(lblMenuBar, "Bookings");
+        WebUI.verifyElementPresent(lblMenuBar, "My Profile");
+        WebUI.verifyElementPresent(lblMenuBar, "Wishlist");
+        WebUI.verifyElementPresent(lblMenuBar, "Newsletter");
         // verify Bookings; My Profile; Wishlist; Newsletter icon
-        verifyElementPresent(imgMenuBarIcon, "bookings-icon");
-        verifyElementPresent(imgMenuBarIcon, "profile-icon");
-        verifyElementPresent(imgMenuBarIcon, "wishlist-icon");
-        verifyElementPresent(imgMenuBarIcon, "newsletter-icon");
+        WebUI.verifyElementPresent(imgMenuBarIcon, "bookings-icon");
+        WebUI.verifyElementPresent(imgMenuBarIcon, "profile-icon");
+        WebUI.verifyElementPresent(imgMenuBarIcon, "wishlist-icon");
+        WebUI.verifyElementPresent(imgMenuBarIcon, "newsletter-icon");
         // verify Bookings menu is selected as default
-        verifyAttribute(lblMenuBar, "Bookings", "class", "active");;
+        WebUI.verifyAttribute(lblMenuBar, "Bookings", "class", "active");;
     }
 
     public static void clickInvoiveButton(String dynamicValue) {
-        click(btnInvoice, dynamicValue);
+        WebUI.click(btnInvoice, dynamicValue);
     }
 }

@@ -1,0 +1,60 @@
+2018/08/27 11:19:41.596 [TESTCASE] *** Execute TestCase: FE001-Login - Login successful ***
+2018/08/27 11:19:41.612 [STEP] Navigate to url 'https://www.phptravels.net/'
+2018/08/27 11:19:41.624 [INFO] navigateURL :: [https://www.phptravels.net]
+2018/08/27 11:19:50.867 [STEP] Select MY ACCOUNT -> Login
+2018/08/27 11:19:50.878 [INFO] click :: [(//ul[contains(@*,'sidebar')])[last()]/li[.//*[contains(text(),'My Account')]]/a]
+2018/08/27 11:19:51.047 [INFO] click :: [//*[./*[@aria-expanded='true']]//li/a[text()=' Login']]
+2018/08/27 11:19:52.189 [STEP] Verify Login page is displayed
+2018/08/27 11:19:52.215 [PASSED] verifyTitle :: [Login] = [Login]
+2018/08/27 11:19:52.237 [PASSED] verifyURL :: [https://www.phptravels.net/login] = [https://www.phptravels.net/login]
+2018/08/27 11:19:52.247 [STEP] Click on 'LOGIN' button with valid email and password
+2018/08/27 11:19:52.257 [INFO] setText :: [user@phptravels.com] :: [//input[@placeholder='Email'][not(@id)]]
+2018/08/27 11:19:52.466 [INFO] setText :: [demouser] :: [//input[@name='password']]
+2018/08/27 11:19:52.602 [INFO] click :: [//button[@type='submit'][contains(@class,'btn-block l')]]
+2018/08/27 11:20:02.865 [STEP] Main page is displayed
+2018/08/27 11:20:10.047 [PASSED] verifyAttributeElement :: [textContent]:[//h3[@class='RTL']] :: [Hi, Johny Smith] = [Hi, Johny Smith]
+2018/08/27 11:20:10.118 [PASSED] verifyAttributeElement :: [innerText]:[//span[@class='h4']] :: [27 August 2018] = [27 August 2018]
+2018/08/27 11:20:10.210 [PASSED] verifyElementPresent :: [//ul[@class='nav profile-tabs']/li[./a[contains(.,'Bookings')]]] :: [true] = [true]
+2018/08/27 11:20:10.294 [PASSED] verifyElementPresent :: [//ul[@class='nav profile-tabs']/li[./a[contains(.,'My Profile')]]] :: [true] = [true]
+2018/08/27 11:20:10.406 [PASSED] verifyElementPresent :: [//ul[@class='nav profile-tabs']/li[./a[contains(.,'Wishlist')]]] :: [true] = [true]
+2018/08/27 11:20:10.530 [PASSED] verifyElementPresent :: [//ul[@class='nav profile-tabs']/li[./a[contains(.,'Newsletter')]]] :: [true] = [true]
+2018/08/27 11:20:10.629 [PASSED] verifyElementPresent :: [//ul[@class='nav profile-tabs' or @id='social-sidebar-menu']/li/a/*[@class='bookings-icon']] :: [true] = [true]
+2018/08/27 11:20:10.727 [PASSED] verifyElementPresent :: [//ul[@class='nav profile-tabs' or @id='social-sidebar-menu']/li/a/*[@class='profile-icon']] :: [true] = [true]
+2018/08/27 11:20:10.805 [PASSED] verifyElementPresent :: [//ul[@class='nav profile-tabs' or @id='social-sidebar-menu']/li/a/*[@class='wishlist-icon']] :: [true] = [true]
+2018/08/27 11:20:10.867 [PASSED] verifyElementPresent :: [//ul[@class='nav profile-tabs' or @id='social-sidebar-menu']/li/a/*[@class='newsletter-icon']] :: [true] = [true]
+2018/08/27 11:20:10.914 [PASSED] verifyAttributeElement :: [class]:[//ul[@class='nav profile-tabs']/li[./a[contains(.,'Bookings')]]] :: [active] = [active]
+2018/08/27 11:20:11.029 [TESTCASE] *** End TestCase: FE001-Login - Login successful ***
+2018/08/27 11:20:11.040 [TESTCASE] *** Execute TestCase: BE001-Login-Login to page successful ***
+2018/08/27 11:20:11.049 [STEP] Login to BE with admin role
+2018/08/27 11:20:11.056 [INFO] navigateURL :: [https://www.phptravels.net/admin]
+2018/08/27 11:20:14.030 [INFO] setText :: [admin@phptravels.com] :: [//input[@placeholder='Email'][not(@id)]]
+2018/08/27 11:20:14.412 [INFO] setText :: [demoadmin] :: [//input[@name='password']]
+2018/08/27 11:20:14.638 [INFO] click :: [//button[@type='submit'][contains(@class,'btn-block l')]]
+2018/08/27 11:20:14.854 [STEP] Verify Main BE page is displayed
+2018/08/27 11:20:20.344 [PASSED] verifyAttributeElement :: [outerText]:[//div[@class='user']/span] :: [Super Admin Admin] = [Super Admin Admin]
+2018/08/27 11:20:20.444 [PASSED] verifyAttributeElement :: [outerText]:[//button[@class='btn btn-danger btn-block']] :: [QUICK BOOKING] = [QUICK BOOKING]
+2018/08/27 11:20:20.536 [PASSED] verifyCssValue :: [background-color]:[//button[@class='btn btn-danger btn-block']] :: [rgba(238, 95, 91, 1)] = [rgba(238, 95, 91, 1)]
+2018/08/27 11:20:20.624 [PASSED] verifyAttributeElement :: [outerText]:[//button[@class='btn btn-primary btn-block']] :: [BOOKINGS] = [BOOKINGS]
+2018/08/27 11:20:20.673 [PASSED] verifyCssValue :: [background-color]:[//button[@class='btn btn-primary btn-block']] :: [rgba(70, 109, 241, 1)] = [rgba(70, 109, 241, 1)]
+2018/08/27 11:20:20.707 [PASSED] verifyAttributeElement :: [outerText]:[//button[@class='btn btn-info btn-block']] :: [  CMS PAGES] = [  CMS PAGES]
+2018/08/27 11:20:20.763 [PASSED] verifyCssValue :: [background-color]:[//button[@class='btn btn-info btn-block']] :: [rgba(91, 192, 222, 1)] = [rgba(91, 192, 222, 1)]
+2018/08/27 11:20:20.799 [PASSED] verifyAttributeElement :: [outerText]:[//button[@class='btn btn-success btn-block']] :: [BLOG] = [BLOG]
+2018/08/27 11:20:20.831 [PASSED] verifyCssValue :: [background-color]:[//button[@class='btn btn-success btn-block']] :: [rgba(98, 196, 98, 1)] = [rgba(98, 196, 98, 1)]
+2018/08/27 11:20:20.868 [PASSED] verifyAttributeElement :: [outerText]:[//button[@class='btn btn-warning btn-block']] :: [SEND NEWSLETTER] = [SEND NEWSLETTER]
+2018/08/27 11:20:20.902 [PASSED] verifyCssValue :: [background-color]:[//button[@class='btn btn-warning btn-block']] :: [rgba(251, 180, 80, 1)] = [rgba(251, 180, 80, 1)]
+2018/08/27 11:20:20.942 [PASSED] verifyAttributeElement :: [outerText]:[//button[@class='btn btn-default btn-block']] :: [BACKUP DATABSE] = [BACKUP DATABSE]
+2018/08/27 11:20:20.987 [PASSED] verifyCssValue :: [background-color]:[//button[@class='btn btn-default btn-block']] :: [rgba(255, 255, 255, 1)] = [rgba(255, 255, 255, 1)]
+2018/08/27 11:20:21.029 [PASSED] verifyElementPresent :: [//div[@class='panel-heading'][.='Booking Summary '='Booking Summary ']] :: [true] = [true]
+2018/08/27 11:20:21.067 [PASSED] verifyElementPresent :: [//div[@class='panel-heading'][.='Booking Summary '='Revenue Chart']] :: [true] = [true]
+2018/08/27 11:20:21.110 [PASSED] verifyElementPresent :: [//div[@class='panel-heading'][.='Booking Summary '='Recent Bookings']] :: [true] = [true]
+2018/08/27 11:20:21.148 [PASSED] verifyAttributeElement :: [outerText]:[//div[@class='pull-left']] :: [VISIT STATISTICS OF AUGUST] = [VISIT STATISTICS OF AUGUST]
+2018/08/27 11:20:21.319 [TESTCASE] *** End TestCase: BE001-Login-Login to page successful ***
+2018/08/27 11:20:21.329 [TESTCASE] *** Execute TestCase: BE002-Login-Login to page unsuccessful ***
+2018/08/27 11:20:22.093 [STEP] Login with blank 'Email' and 'Password'
+2018/08/27 11:20:22.100 [INFO] navigateURL :: [https://www.phptravels.net/admin]
+2018/08/27 11:20:23.024 [INFO] setText :: [] :: [//input[@placeholder='Email'][not(@id)]]
+2018/08/27 11:20:23.132 [INFO] setText :: [] :: [//input[@name='password']]
+2018/08/27 11:20:23.230 [INFO] click :: [//button[@type='submit'][contains(@class,'btn-block l')]]
+2018/08/27 11:20:23.545 [FAILED] verifyElementPresent :: [//*[contains(text(),'Please fill out this field.']] :: [false] = [true]
+2018/08/27 11:20:24.629 [TESTCASE] *** End TestCase: BE002-Login-Login to page unsuccessful ***
+2018/08/27 11:20:24.651 [INFO] closeDriver

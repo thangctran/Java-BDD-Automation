@@ -10,7 +10,7 @@ public class InitTestSuite extends TestListenerAdapter{
     // Override to custom onTestStart function of TestNG
     @Override
     public void onTestStart(ITestResult itr) {
-        Utility.logInfo("TESTCASE","*** Execute TestCase: " + itr.getName() + " ***", 1);
+        Utility.logInfo("TESTCASE","*** Execute TestCase: " + itr.getMethod().getDescription() + " ***", 1);
     }
 
     // Override to custom onTestFailure function of TestNG
@@ -42,6 +42,6 @@ public class InitTestSuite extends TestListenerAdapter{
     // Override to custom onTestEnd function of TestNG
     public void onTestEnd(ITestResult itr) {
         WebUI.deleteAllCookies();
-        Utility.logInfo("TESTCASE","*** End TestCase: " + itr.getName() + " ***", 1);
+        Utility.logInfo("TESTCASE","*** End TestCase: " + itr.getMethod().getDescription() + " ***", 1);
     }
 }

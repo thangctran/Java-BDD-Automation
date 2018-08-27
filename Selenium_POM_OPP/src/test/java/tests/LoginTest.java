@@ -2,7 +2,6 @@ package tests;
 
 import java.util.Map;
 
-
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;

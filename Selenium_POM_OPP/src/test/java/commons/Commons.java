@@ -18,15 +18,15 @@ public class Commons extends BasePages {
 
     public static void login(String url, String email, String password) {
         if(url != null) WebUI.navigateURL(url);
-        if(email != null)setText(txtEmail, null, email);
-        if(password != null) setText(txtPassword, null, password);
-        click(btnLogin, null);
+        if(email != null) WebUI.setText(txtEmail, null, email);
+        if(password != null) WebUI.setText(txtPassword, null, password);
+        WebUI.click(btnLogin, null);
     }
 
     public static String deleteRowByButton(String rowIndex, String columnName) {
         selectCheckboxOnTable(Controls.table, null,"1", rowIndex, true);
         List<String> listName = getCellValuesOnTable(Controls.table, null, columnName, rowIndex);
-        click(Controls.link, " Delete Selected");
+        WebUI.click(Controls.link, " Delete Selected");
         WebUI.acceptAlert();
         return listName.get(0);
     }
@@ -40,45 +40,45 @@ public class Commons extends BasePages {
 
     public static void uploadGallery(String rowIndex, String imageUpload) {
         clickCellOnTable(Controls.table, null, "Gallery", rowIndex);
-        click(btnAddPhotos, null);
+        WebUI.click(btnAddPhotos, null);
         WebUI.upLoadFile(lblDropFiles, null, imageUpload);
     }
 
     public static void searchRecordsOnTable(String text, String field) {
-        scrollToElement(lstSearch, "Search");
-        click(lstSearch, "Search");
-        setText(Controls.textbox, "phrase", text);
-        selectOptionByText(Controls.dropdown, "column", field);
-        click(lstSearch, "Go");
+        WebUI.scrollToElement(lstSearch, "Search");
+        WebUI.click(lstSearch, "Search");
+        WebUI.setText(Controls.textbox, "phrase", text);
+        WebUI.selectOptionByText(Controls.dropdown, "column", field);
+        WebUI.click(lstSearch, "Go");
     }
 
     public static void setPriceRange(Integer from, Integer to) {
-        int sliderWidth = WebUI.getHeight(sldPriceRange, null);
+        int sliderWidth = WebUI.getWidth(sldPriceRange, null);
         int posi = 0;
         if(from != null){
             posi = (int)(sliderWidth * from / 100);
-            dragAndDrop(sldRound, "1", sldPriceRange, null, posi, 2);
+            WebUI.dragAndDrop(sldRound, "1", sldPriceRange, null, posi, 2);
         }
         if(to != null){
             posi = (int)(sliderWidth * to / 100);
-            dragAndDrop(sldRound, "2", sldPriceRange, null, posi, 2);
+            WebUI.dragAndDrop(sldRound, "2", sldPriceRange, null, posi, 2);
         }
     }
 
     public static void filerSearch(String startGrade, List<String> listPropertyTypes, List<String> listAmenities, String tour_Car_Type, String airportPickup ) {
-        click(rdoStartGrade, startGrade);
+        WebUI.click(rdoStartGrade, startGrade);
         if(listPropertyTypes != null) {
             for(String itemType : listPropertyTypes) {
-                selectCheckbox(Controls.checkbox, itemType, true);
+                WebUI.selectCheckbox(Controls.checkbox, itemType, true);
             }
         }
         if(listAmenities != null) {
             for(String itemAmenities : listAmenities) {
-                selectCheckbox(Controls.checkbox, itemAmenities, true);
+                WebUI.selectCheckbox(Controls.checkbox, itemAmenities, true);
             }
         }
-        if(tour_Car_Type != null) click(Controls.radio, tour_Car_Type);
-        if(airportPickup != null) selectOptionByText(Controls.dropdown, "pickup" , airportPickup);
-        click(Controls.button, "Search");
+        if(tour_Car_Type != null) WebUI.click(Controls.radio, tour_Car_Type);
+        if(airportPickup != null) WebUI.selectOptionByText(Controls.dropdown, "pickup" , airportPickup);
+        WebUI.click(Controls.button, "Search");
     }
 }

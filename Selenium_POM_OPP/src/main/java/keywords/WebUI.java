@@ -132,6 +132,11 @@ public class WebUI extends Driver {
         webElement("click", strXpath, dynamicValue).click();
     }
 
+    public static void clickAndWait(String strXpath, String dynamicValue, int waitSeconds) {
+        webElement("click", strXpath, dynamicValue).click();
+        Utility.delay(waitSeconds);
+    }
+
     public static void clickMousePosition(String strXpath, String dynamicValue, Integer x, Integer y, Enums.CLICK_TYPE clickType) {
         String newXpath = Utility.convertXpath(strXpath, dynamicValue);
         WebElement element = driver.findElement(By.xpath(newXpath));
@@ -225,6 +230,7 @@ public class WebUI extends Driver {
             Utility.logInfo("ERROR", "typeKeysByRobot :: " + e.getMessage(), 1);
         }
     }
+
     public static void upLoadFile(String strXpath, String dynamicValue, String imagePath) {
         webElement("upLoadFile", strXpath, dynamicValue).click();
         typeKeysByRobot(imagePath);
@@ -288,14 +294,14 @@ public class WebUI extends Driver {
     public static void verifyAttributeOnList(String strListXpath, String dynamicValue, String attribute, String expectedValue) {
         String newXpath = Utility.convertXpath(strListXpath, dynamicValue);
         List<WebElement> wListRows = driver.findElements(By.xpath(newXpath));
-        String checkValue = "match";
+        String currentValue = "";
         for(WebElement webElement : wListRows) {
-            if(webElement.getAttribute(attribute) != expectedValue) {
-                checkValue = "Not match";;
+            currentValue = webElement.getAttribute(attribute).trim();
+            if(!currentValue.contentEquals(expectedValue)) {
                 break;
             }
         }
-        Utility.verifyValues("verifyAttributeOnList :: [" + attribute + "]:[" + newXpath + "]", checkValue, "match", Enums.OPERATOR.equal);
+        Utility.verifyValues("verifyAttributeOnList :: [" + attribute + "]:[" + newXpath + "]", currentValue, expectedValue, Enums.OPERATOR.equal);
     }
 
     public static String getCssValue(String strXpath, String dynamicValue, String attribute) {
@@ -311,14 +317,14 @@ public class WebUI extends Driver {
     public static void verifyCssValueOnList(String strListXpath, String dynamicValue, String attribute, String expectedValue) {
         String newXpath = Utility.convertXpath(strListXpath, dynamicValue);
         List<WebElement> wListRows = driver.findElements(By.xpath(newXpath));
-        String checkValue = "match";
+        String currentValue = "";
         for(WebElement webElement : wListRows) {
-            if(webElement.getCssValue(attribute) != expectedValue) {
-                checkValue = "Not match";;
+            currentValue = webElement.getCssValue(attribute).trim();
+            if(!currentValue.contentEquals(expectedValue)) {
                 break;
             }
         }
-        Utility.verifyValues("verifyCssValueOnList :: [" + attribute + "]:[" + newXpath + "]", checkValue, "match", Enums.OPERATOR.equal);
+        Utility.verifyValues("verifyCssValueOnList :: [" + attribute + "]:[" + newXpath + "]", currentValue, expectedValue, Enums.OPERATOR.equal);
     }
 
     public static int countItemsOnList(String strListXpath, String dynamicValue) {

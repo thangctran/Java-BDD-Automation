@@ -8,6 +8,7 @@ import utilities.Utility;
 
 public class CarsPage extends BasePages {
     static String btnAirportPickup = "//button[.=' Airport Pickup']";
+
     public static void filerSearch(String startGrade, String carType, String airportPickup){
         Commons.filerSearch(startGrade, null, null, carType, airportPickup );
     }
@@ -17,11 +18,11 @@ public class CarsPage extends BasePages {
     }
 
     public static void verifyGreenAirportPickupButton() {
-        String xpathTable = Utility.convertXpath(Controls.table, "bgwhite table table-striped");
-        int rows = countRows(xpathTable, null);
+        String xpathTableRow = Utility.convertXpath(Controls.table, "bgwhite table table-striped") + "/*/tr";
+        int rows = WebUI.countItemsOnList(xpathTableRow, null);
         for(int n=1; n<= rows; n++){
-            String newXpath = String.format("%s//tr[%d]%s", xpathTable, n, btnAirportPickup);
-            WebUI.verifyCssValue(newXpath, null, "background-color", "rgba(76, 174, 76, 1)");
+            String newXpath = String.format("%s[%d]%s", xpathTableRow, n, btnAirportPickup);
+            WebUI.verifyCssValue(newXpath, null, "background-color", "rgba(92, 184, 92, 1)");
         }
     }
 }
