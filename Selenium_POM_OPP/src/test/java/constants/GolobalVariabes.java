@@ -13,6 +13,7 @@ public class GolobalVariabes {
     public final static String userName = "Johny Smith";
     public final static String urlHotels = urlFE + "/hotels";
     public final static String urlFlights = urlFE + "/flights";
+    public final static String urlTours = urlFE + "/tours";
     public final static String urlCars = urlFE + "/cars";
     public final static String urlBlog = urlFE + "/blog";
     public final static String urlVisa = urlFE + "/ivisa";

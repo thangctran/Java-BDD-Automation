@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Filter Search Test Suite" verbose="1" preserve-order="true" parallel="none">
+    <listeners>
+        <listener class-name="utilities.InitTestSuite" />
+        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+    </listeners>
+    <test name="Filter Search Test" >
+        <classes>
+            <class name="tests.FilterSearchTest"/>
+            <methods>
+                <include name="FE002_Tours" />
+                <include name="FE003_Cars" />
+                <include name="FE005_Hotels" />
+            </methods>
+        </classes>
+    </test>
+</suite>
