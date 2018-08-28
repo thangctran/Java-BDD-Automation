@@ -2,12 +2,12 @@ package pages.be;
 
 import java.util.List;
 import commons.Commons;
+import commons.CustomWebUI;
 import constants.Controls;
-import pages.BasePages;
 import utilities.Enums;
 import utilities.Utility;
 
-public class HotelsManagementPage extends BasePages {
+public class HotelsManagementPage {
     public static String deleteHotelByButton(String rowIndex) {
         return Commons.deleteRowByButton(rowIndex, "Name");
     }
@@ -17,12 +17,12 @@ public class HotelsManagementPage extends BasePages {
     }
 
     public static void verifyHotelNameDeleted(String rowIndex, String hotelName) {
-        List<String> listName = Commons.getCellValuesOnTable(Controls.table, null, "Name", rowIndex);
+        List<String> listName = CustomWebUI.getCellValuesOnTable(Controls.table, null, "Name", rowIndex);
         Utility.verifyValues("verifyHotelNameDeleted", listName.get(0), hotelName, Enums.OPERATOR.notEqual);
     }
 
     public static int getImageNumberUpload(String rowIndex) {
-        List<String> listGallery = Commons.getCellValuesOnTable(Controls.table, null,"Gallery", rowIndex);
+        List<String> listGallery = CustomWebUI.getCellValuesOnTable(Controls.table, null,"Gallery", rowIndex);
         return Utility.getNumericInString(listGallery.get(0));
     }
 

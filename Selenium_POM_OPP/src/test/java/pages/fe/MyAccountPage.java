@@ -1,10 +1,9 @@
 package pages.fe;
 
 import keywords.WebUI;
-import pages.BasePages;
 import utilities.Utility;
 
-public class MyAccountPage extends BasePages {
+public class MyAccountPage {
     final static String lblUserName = "//h3[@class='RTL']";
     final static String lblCurrentDay = "//span[@class='h4']";
     final static String imgMenuBarIcon = "//ul[@class='nav profile-tabs' or @id='social-sidebar-menu']/li/a/*[//@class]";

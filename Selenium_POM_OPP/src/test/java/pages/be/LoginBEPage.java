@@ -1,10 +1,9 @@
 package pages.be;
 
 import commons.Commons;
-import pages.BasePages;
 import keywords.WebUI;
 
-public class LoginBEPage extends BasePages {
+public class LoginBEPage {
     final static String lblErrorMessage = "//div[starts-with(@class,'alert')]/p";
     final static String lblWaringMessage = "//*[contains(text(),'Please fill out this field.']";
 

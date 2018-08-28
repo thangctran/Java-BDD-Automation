@@ -2,10 +2,11 @@ package pages.fe;
 
 import java.util.List;
 import commons.Commons;
+import commons.CustomWebUI;
 import constants.Controls;
-import pages.BasePages;
 
-public class HotelsPage extends BasePages {
+public class HotelsPage {
+
     public static void filerSearch(String startGrade, List<String> listPropertyTypes, List<String> listAmenities){
         Commons.filerSearch(startGrade, listPropertyTypes, listAmenities, null, null );
     }
@@ -15,6 +16,6 @@ public class HotelsPage extends BasePages {
     }
 
     public static void verifyNumberStartHotels(String expectedStart) {
-        Commons.verifyStartOnTable(Controls.table, "bgwhite table table-striped", "1",null, expectedStart);
+        CustomWebUI.verifyStartOnTable(Controls.table, "bgwhite table table-striped", "1",null, expectedStart);
     }
 }

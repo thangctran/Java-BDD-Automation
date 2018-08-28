@@ -2,9 +2,8 @@ package pages.fe;
 
 import commons.Commons;
 import keywords.WebUI;
-import pages.BasePages;
 
-public class ToursPage extends BasePages {
+public class ToursPage {
     static String lstTourType = "//*[./strong[text()='Tour Type']]/a[1]";
 
     public static void filerSearch(String startGrade, String tourType){

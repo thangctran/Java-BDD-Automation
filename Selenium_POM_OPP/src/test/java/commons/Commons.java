@@ -2,10 +2,9 @@ package commons;
 
 import java.util.List;
 import keywords.WebUI;
-import pages.BasePages;
 import constants.Controls;
 
-public class Commons extends BasePages {
+public class Commons {
     final static String txtEmail = "//input[@placeholder='Email'][not(@id)]";
     final static String txtPassword = "//input[@name='password']";
     final static String btnLogin = "//button[@type='submit'][contains(@class,'btn-block l')]";
@@ -24,22 +23,22 @@ public class Commons extends BasePages {
     }
 
     public static String deleteRowByButton(String rowIndex, String columnName) {
-        selectCheckboxOnTable(Controls.table, null,"1", rowIndex, true);
-        List<String> listName = getCellValuesOnTable(Controls.table, null, columnName, rowIndex);
+        CustomWebUI.selectCheckboxOnTable(Controls.table, null,"1", rowIndex, true);
+        List<String> listName = CustomWebUI.getCellValuesOnTable(Controls.table, null, columnName, rowIndex);
         WebUI.click(Controls.link, " Delete Selected");
         WebUI.acceptAlert();
         return listName.get(0);
     }
 
     public static String deleteRowByIcon(String rowIndex, String columnName) {
-        List<String> listName = getCellValuesOnTable(Controls.table, null, columnName, rowIndex);
-        clickIconOnTable(Controls.table, null, rowIndex, "DELETE");
+        List<String> listName = CustomWebUI.getCellValuesOnTable(Controls.table, null, columnName, rowIndex);
+        CustomWebUI.clickIconOnTable(Controls.table, null, rowIndex, "DELETE");
         WebUI.acceptAlert();
         return listName.get(0);
     }
 
     public static void uploadGallery(String rowIndex, String imageUpload) {
-        clickCellOnTable(Controls.table, null, "Gallery", rowIndex);
+        CustomWebUI.clickCellOnTable(Controls.table, null, "Gallery", rowIndex);
         WebUI.click(btnAddPhotos, null);
         WebUI.upLoadFile(lblDropFiles, null, imageUpload);
     }

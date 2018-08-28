@@ -1,10 +1,9 @@
 package pages.be;
 
-import pages.BasePages;
 import utilities.Utility;
 import keywords.WebUI;
 
-public class MainBEPage extends BasePages {
+public class MainBEPage {
     final static String btnButtons = "//button[//@class]";
     final static String lblHeadSessions = "//div[@class='panel-heading'][//.='Booking Summary ']";
     final static String lblVisitStatistics = "//div[@class='pull-left']";

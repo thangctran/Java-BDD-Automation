@@ -3,10 +3,9 @@ package pages.fe;
 import commons.Commons;
 import constants.Controls;
 import keywords.WebUI;
-import pages.BasePages;
 import utilities.Utility;
 
-public class CarsPage extends BasePages {
+public class CarsPage {
     static String btnAirportPickup = "//button[.=' Airport Pickup']";
 
     public static void filerSearch(String startGrade, String carType, String airportPickup){

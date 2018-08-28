@@ -1,4 +1,4 @@
-package pages;
+package commons;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,10 +6,9 @@ import keywords.WebUI;
 import utilities.Enums;
 import utilities.Utility;
 
-public class BasePages {
-
+public class CustomWebUI {
     public static int countRows(String strTableXpath, String dynamicValue) {
-        String newXpath = Utility.convertXpath(strTableXpath, dynamicValue) + "//tr";
+        String newXpath = Utility.convertXpath(strTableXpath, dynamicValue) + "//tr/td[1]";
         return WebUI.countItemsOnList(newXpath, null);
     }
 
