@@ -1,6 +1,5 @@
 package tests;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -37,13 +36,13 @@ public class FilterSearchTest {
         WebUI.navigateURL(GolobalVariabes.urlTours);
 
         Utility.logInfo("STEP", " Price range: From 0 to 60", 1);
-        ToursPage.setPriceRange(Integer.valueOf(data.get("price_from")), Integer.valueOf(data.get("price_to")));
+        ToursPage.setPriceRange(Integer.valueOf(data.get("priceFrom")), Integer.valueOf(data.get("priceTo")));
 
         Utility.logInfo("STEP", "Filter Search: Star grade: 3; Tour Types: Holidays", 1);
-        ToursPage.filerSearch(data.get("star"), data.get("tour_type"));
+        ToursPage.filerSearch(data.get("star"), data.get("tourType"));
 
         Utility.logInfo("STEP", "Tour Type of each Hotels is 'Holidays", 1);
-        ToursPage.verifyTourType(data.get("tour_type"));
+        ToursPage.verifyTourType(data.get("tourType"));
     }
 
 
@@ -56,7 +55,7 @@ public class FilterSearchTest {
         WebUI.navigateURL(GolobalVariabes.urlCars);
 
         Utility.logInfo("STEP", "Filter Search: Star grade: 4; Car Types: Standard; Airport Pickup: Yes", 1);
-        CarsPage.filerSearch(data.get("star"), data.get("car_type"), data.get("airport_pickup"));
+        CarsPage.filerSearch(data.get("star"), data.get("carType"), data.get("airportPickup"));
 
         Utility.logInfo("STEP", "Airport Pickup displays for each Casr with green backgourd-color", 1);
         CarsPage.verifyGreenAirportPickupButton();
@@ -65,20 +64,20 @@ public class FilterSearchTest {
     @Test(priority = 0, description = "FE005-Hotels - Verify Hotel Filter")
     public void FE005_Hotels() {
         //set variable
-        String startNumber = "4";
-        List<String> listPropertyTypes = Arrays.asList("Hotel", "Villa");
-        List<String> listAmenities = Arrays.asList("Night Club", "Restaurant");
+        Map<String, String> data = FileHelper.getTestDataCSV("fe\\FE005.csv", "\t", 1);
+        List<String> listPropertyTypes = Utility.convertStringToList(data.get("propertyTypes"), ",");
+        List<String> listAmenities = Utility.convertStringToList(data.get("amenities"), ",");
 
         Utility.logInfo("STEP", "Navigate to url 'https://www.phptravels.net/hotels'", 1);
         WebUI.navigateURL(GolobalVariabes.urlHotels);
 
         Utility.logInfo("STEP", " Price range: From 0 to 40", 1);
-        HotelsPage.setPriceRange(0, 40);
+        HotelsPage.setPriceRange(Integer.valueOf(data.get("priceFrom")), Integer.valueOf(data.get("priceTo")));
 
         Utility.logInfo("STEP", "Filter Search: Star grade; Property Types and Amenities", 1);
-        HotelsPage.filerSearch(startNumber, listPropertyTypes, listAmenities);
+        HotelsPage.filerSearch(data.get("star"), listPropertyTypes, listAmenities);
 
         Utility.logInfo("STEP", "Number Start of each Hotel is from 4 to 5 starts", 1);
-        HotelsPage.verifyNumberStartHotels(startNumber);
+        HotelsPage.verifyNumberStartHotels(data.get("star"));
     }
 }

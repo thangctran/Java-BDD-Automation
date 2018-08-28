@@ -1,7 +1,10 @@
 package utilities;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.text.SimpleDateFormat;
 import org.testng.Assert;
 import helpers.FileHelper;
 
@@ -38,6 +41,11 @@ public class Utility {
 
     public static boolean isNumeric(String string) {
         return string.matches("-?\\d+(\\.\\d+)?");
+    }
+
+    public static List<String> convertStringToList(String string, String delimiter) {
+        List<String> myList = new ArrayList<String>(Arrays.asList(string.split(delimiter)));
+        return myList;
     }
 
     public static String parseString(String string, String startSub, String endSub) {
