@@ -116,24 +116,24 @@ public class WebUI extends Driver {
     }
 
     public static int getHeight(String strXpath, String dynamicValue) { ;
-        return webElement("getHeight", strXpath, dynamicValue).getSize().getHeight();
+        return findElement("getHeight", strXpath, dynamicValue).getSize().getHeight();
     }
 
     public static int getWidth(String strXpath, String dynamicValue) {
-        return webElement("getWidth", strXpath, dynamicValue).getSize().getWidth();
+        return findElement("getWidth", strXpath, dynamicValue).getSize().getWidth();
     }
 
     public static void scrollToElement(String strXpath, String dynamicValue) {
-        WebElement element = webElement("scrollToElement", strXpath, dynamicValue);
+        WebElement element = findElement("scrollToElement", strXpath, dynamicValue);
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
     }
 
     public static void click(String strXpath, String dynamicValue) {
-        webElement("click", strXpath, dynamicValue).click();
+        findElement("click", strXpath, dynamicValue).click();
     }
 
     public static void clickAndWait(String strXpath, String dynamicValue, int waitSeconds) {
-        webElement("click", strXpath, dynamicValue).click();
+        findElement("click", strXpath, dynamicValue).click();
         Utility.delay(waitSeconds);
     }
 
@@ -166,8 +166,8 @@ public class WebUI extends Driver {
     }
 
     public static void dragAndDrop(String sourceXpath, String sourceDynamic, String targetXpath, String targetDynamic, Integer x, Integer y) {
-        WebElement source = webElement("drag", sourceXpath, sourceDynamic);
-        WebElement target = webElement("drop", targetXpath, targetDynamic);
+        WebElement source = findElement("drag", sourceXpath, sourceDynamic);
+        WebElement target = findElement("drop", targetXpath, targetDynamic);
 
         int eleWidth = Math.round(target.getSize().getWidth()/2);
         if(x != null) eleWidth = x;
@@ -180,13 +180,13 @@ public class WebUI extends Driver {
     }
 
     public static void selectCheckbox(String strXpath, String dynamicValue, boolean status) {
-        WebElement element = webElement("selectCheckbox :: [" + status + "]", strXpath, dynamicValue);
+        WebElement element = findElement("selectCheckbox :: [" + status + "]", strXpath, dynamicValue);
         boolean currentStatus = element.isSelected();
         if(currentStatus != status) element.click();
     }
 
     public static void setText(String strXpath, String dynamicValue, String value) {
-        webElement("setText :: [" + value + "]", strXpath, dynamicValue).sendKeys(value);
+        findElement("setText :: [" + value + "]", strXpath, dynamicValue).sendKeys(value);
     }
 
     public static void pressKeys(String keys) {
@@ -232,24 +232,24 @@ public class WebUI extends Driver {
     }
 
     public static void upLoadFile(String strXpath, String dynamicValue, String imagePath) {
-        webElement("upLoadFile", strXpath, dynamicValue).click();
+        findElement("upLoadFile", strXpath, dynamicValue).click();
         typeKeysByRobot(imagePath);
     }
 
     public static void selectOptionByText(String strXpath, String dynamicValue, String text) {
-        WebElement element = webElement("selectOptionByText :: [" + text + "]", strXpath, dynamicValue);
+        WebElement element = findElement("selectOptionByText :: [" + text + "]", strXpath, dynamicValue);
         Select dropdown = new Select(element);
         dropdown.selectByVisibleText(text);
     }
 
     public static void selectOptionByValue(String strXpath, String dynamicValue, String value) {
-        WebElement element = webElement("selectOptionByValue :: [" + value + "]", strXpath, dynamicValue);
+        WebElement element = findElement("selectOptionByValue :: [" + value + "]", strXpath, dynamicValue);
         Select dropdown = new Select(element);
         dropdown.selectByValue(value);
     }
 
     public static void selectOptionByIndex(String strXpath, String dynamicValue, int index) {
-        WebElement element = webElement("selectOptionByIndex :: [" + index + "]", strXpath, dynamicValue);
+        WebElement element = findElement("selectOptionByIndex :: [" + index + "]", strXpath, dynamicValue);
         Select dropdown = new Select(element);
         dropdown.selectByIndex(index);
     }
@@ -272,7 +272,7 @@ public class WebUI extends Driver {
     }
 
     public static String getAttribute(String strXpath, String dynamicValue, String attribute) {
-        return webElement("getAttribute :: [" + attribute + "]", strXpath, dynamicValue).getAttribute(attribute).trim();
+        return findElement("getAttribute :: [" + attribute + "]", strXpath, dynamicValue).getAttribute(attribute).trim();
     }
 
     public static void verifyAttribute(String strXpath, String dynamicValue, String attribute, String expectedValue) {
@@ -305,7 +305,7 @@ public class WebUI extends Driver {
     }
 
     public static String getCssValue(String strXpath, String dynamicValue, String attribute) {
-        return webElement("getCssValue :: [" + attribute + "]", strXpath, dynamicValue).getCssValue(attribute).trim();
+        return findElement("getCssValue :: [" + attribute + "]", strXpath, dynamicValue).getCssValue(attribute).trim();
     }
 
     public static void verifyCssValue(String strXpath, String dynamicValue, String attribute, String expectedValue) {

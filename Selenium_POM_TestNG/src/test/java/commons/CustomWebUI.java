@@ -26,13 +26,13 @@ public class CustomWebUI {
 
     public static void clickIconOnTable(String strTableXpath, String dynamicValue, String rowIndex, String icon) {
         String newXpath = String.format("%s//tr[%s]/td//a[@title='%s']", strTableXpath, rowIndex, icon);
-        WebUI.webElement("clickIconOnTable", newXpath, dynamicValue).click();
+        WebUI.findElement("clickIconOnTable", newXpath, dynamicValue).click();
     }
 
     public static void clickCellOnTable(String strTableXpath, String dynamicValue, String column, String rowIndex) {
         String columnName = getColumnXpath(column);
         String newXpath = String.format("%s//tr[%s]/td[%s]//a", strTableXpath, rowIndex, columnName);
-        WebUI.webElement("clickCellOnTable", newXpath, dynamicValue).click();
+        WebUI.findElement("clickCellOnTable", newXpath, dynamicValue).click();
     }
 
     public static List<String> getCellValuesOnTable(String strTableXpath, String dynamicValue, String column, String rowIndex) {

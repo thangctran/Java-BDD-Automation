@@ -60,7 +60,7 @@ public class Driver {
         return driverTest;
     }
 
-    public static WebElement webElement(String description, String strXpath, String dynamicValue){
+    public static WebElement findElement(String description, String strXpath, String dynamicValue){
         WebElement element;
         String newXpath = Utility.convertXpath(strXpath, dynamicValue);
         try {
