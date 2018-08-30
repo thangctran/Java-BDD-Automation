@@ -2,12 +2,11 @@ package tests;
 
 import java.util.Map;
 
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 import constants.GolobalVariabes;
-import drivers.Driver;
 import keywords.WebUI;
 import helpers.FileHelper;
 import pages.be.MainBEPage;
@@ -16,18 +15,11 @@ import pages.fe.MyAccountPage;
 import utilities.Utility;
 
 public class LoginTest {
-
-    @BeforeSuite
-    public void startTestSuite(){
-        Driver.setDriver(Driver.setSeleniumDrivers());
+    @Given("^I navigate to Front-End page $")
+    public void user_is_on_homepage() {
+        WebUI.navigateURL(GolobalVariabes.urlFE);
     }
 
-    @AfterSuite
-    public void endTestSuite(){
-        WebUI.closeDriver();
-    }
-
-    @Test(priority = 0, description = "FE001-Login - Login successful")
     public void FE001_LoginFE() {
         Utility.logInfo("STEP","Navigate to url 'https://www.phptravels.net/'", 1);
         WebUI.navigateURL(GolobalVariabes.urlFE);
@@ -46,7 +38,6 @@ public class LoginTest {
         MyAccountPage.verifyMyAccountPage(GolobalVariabes.userName);
     }
 
-    @Test(priority = 0, description = "BE001-Login-Login to page successful")
     public void BE001_LoginBE() {
         //Define test data
 //        Map<String, String> data = FileHelper.getTestDataCSV("login\\BE001.csv", ",", 1);
@@ -58,7 +49,6 @@ public class LoginTest {
         MainBEPage.verifyMainBEPage(GolobalVariabes.userBEName);
     }
 
-    @Test(priority = 0, description = "BE002-Login-Login to page unsuccessful")
     public void BE002_LoginBE() {
         //Define test data
         Map<String, String> data = FileHelper.getTestDataRow("testData.xlsx", "login", 1);
