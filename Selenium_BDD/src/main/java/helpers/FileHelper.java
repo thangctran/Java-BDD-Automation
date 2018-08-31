@@ -1,6 +1,5 @@
 package helpers;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
@@ -23,8 +22,6 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import constants.Environemnts;
@@ -121,81 +118,6 @@ public class FileHelper {
             e.printStackTrace();
         }
         return returnedValue;
-    }
-
-    public static Map<String,String> getTestDataRow(String strTestDataName, String strSheetName, int iRowIndex) {
-        // Initiate dictionary to contain returned values
-        Map<String,String> dictTestDataRow = new HashMap<String, String>();
-        int iRow = iRowIndex;
-        try{
-            if (iRow == 0) {
-                throw new Exception("Row 0 is used as header name, row index must start from 1");
-            } else {
-                // Initiate test data location path
-                String strTestDataPath = Environemnts.DATA_PATH  + "\\" + strTestDataName;
-
-                // Initiate column count variable
-                int iCol = 0;
-
-                // Initiate file input stream to read excel file
-                FileInputStream fis = new FileInputStream(strTestDataPath);
-
-                // Initiate excel workbook which contains the sheet
-                Workbook wb = new XSSFWorkbook(fis);
-
-                // Initiate sheet which contains the expected cell
-                Sheet sheet = wb.getSheet(strSheetName);
-
-                // Initiate Formular Evaluator to evaluate if the expected cell contains a formular
-                FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
-                Row rHeaderRows = sheet.getRow(0);
-                Cell cHeaderCell = rHeaderRows.getCell(0);
-                String strHeader = cHeaderCell.getStringCellValue();
-
-                String strCellValue = "";
-
-                while (cHeaderCell != null) {
-                    strHeader = cHeaderCell.getStringCellValue();
-                    // Get value of corresponding cell
-                    Row rExpectedRows = sheet.getRow(iRow);
-                    Cell cExpectedCell = rExpectedRows.getCell(iCol);
-                    switch (cExpectedCell.getCellType()) {
-                        case Cell.CELL_TYPE_BOOLEAN:
-                            Boolean bCellvaLue = cExpectedCell.getBooleanCellValue();
-                            strCellValue = bCellvaLue.toString();
-                            break;
-                        case Cell.CELL_TYPE_NUMERIC:
-                            Number nCellValue = cExpectedCell.getNumericCellValue();
-                            strCellValue = nCellValue.toString();
-                            break;
-                        case Cell.CELL_TYPE_STRING:
-                            strCellValue = cExpectedCell.getStringCellValue();
-                            break;
-                        case Cell.CELL_TYPE_FORMULA:
-                            switch (evaluator.evaluateFormulaCell(cExpectedCell)) {
-                                case Cell.CELL_TYPE_BOOLEAN:
-                                    Boolean bCellvaLueResult = cExpectedCell.getBooleanCellValue();
-                                    strCellValue = bCellvaLueResult.toString();
-                                    break;
-                                case Cell.CELL_TYPE_NUMERIC:
-                                    Number nCellValueResult = cExpectedCell.getNumericCellValue();
-                                    strCellValue = nCellValueResult.toString();
-                                    break;
-                                case Cell.CELL_TYPE_STRING:
-                                    strCellValue = cExpectedCell.getStringCellValue();
-                                    break;
-                            }
-                    }
-                    dictTestDataRow.put(strHeader, strCellValue);
-                    iCol++;
-                    rHeaderRows = sheet.getRow(0);
-                    cHeaderCell = rHeaderRows.getCell(iCol);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return dictTestDataRow;
     }
 
     public static Map<String,String> getTestDataCSV(String strCSVName, String delimiter,  int iRowIndex) {

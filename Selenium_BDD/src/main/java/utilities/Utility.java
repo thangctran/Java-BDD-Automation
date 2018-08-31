@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.text.SimpleDateFormat;
-import org.testng.Assert;
+import static org.junit.Assert.assertEquals;
 import helpers.FileHelper;
 
 public class Utility {
@@ -129,6 +129,6 @@ public class Utility {
         if(verifyStatus) logInfo("PASSED", actionName + " :: [" + actualValue + "] " + operator + " [" + expectedValue + "]", 1);
         else logInfo("FAILED", actionName + " :: [" + actualValue + "] " + operator + " [" + expectedValue + "]", 1);
         //Validation
-        Assert.assertEquals(verifyStatus, true);
+        assertEquals(verifyStatus, true);
     }
 }

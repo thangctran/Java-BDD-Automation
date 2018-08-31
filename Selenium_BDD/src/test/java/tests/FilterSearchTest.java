@@ -3,10 +3,6 @@ package tests;
 import java.util.List;
 import java.util.Map;
 
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
-
 import constants.GolobalVariabes;
 import helpers.FileHelper;
 import pages.fe.CarsPage;
@@ -17,17 +13,9 @@ import keywords.WebUI;
 import utilities.Utility;
 
 public class FilterSearchTest {
-    @BeforeSuite
-    public void startTestSuite(){
-        Driver.setDriver(Driver.setSeleniumDrivers());
-    }
 
-    @AfterSuite
-    public void endTestSuite(){
-        WebUI.closeDriver();
-    }
 
-    @Test(priority = 0, description = "FE002-Tours - Verify Tours Filter")
+//    @Test(priority = 0, description = "FE002-Tours - Verify Tours Filter")
     public void FE002_Tours() {
         //set variable
         Map<String, String> data = FileHelper.getTestDataCSV("fe\\FE002.csv", ",", 1);
@@ -46,7 +34,7 @@ public class FilterSearchTest {
     }
 
 
-    @Test(priority = 0, description = "FE003-Cars - Verify Cars Filter")
+//    @Test(priority = 0, description = "FE003-Cars - Verify Cars Filter")
     public void FE003_Cars() {
         //set variable
         Map<String, String> data = FileHelper.getTestDataCSV("fe\\FE003.csv", ",", 1);
@@ -61,7 +49,7 @@ public class FilterSearchTest {
         CarsPage.verifyGreenAirportPickupButton();
     }
 
-    @Test(priority = 0, description = "FE005-Hotels - Verify Hotel Filter")
+//    @Test(priority = 0, description = "FE005-Hotels - Verify Hotel Filter")
     public void FE005_Hotels() {
         //set variable
         Map<String, String> data = FileHelper.getTestDataCSV("fe\\FE005.csv", "\t", 1);
