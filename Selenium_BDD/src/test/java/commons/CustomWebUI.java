@@ -2,9 +2,11 @@ package commons;
 
 import java.util.ArrayList;
 import java.util.List;
+import constants.Controls;
 import keywords.WebUI;
 import utilities.Enums;
 import utilities.Utility;
+import utilities.Variables;
 
 public class CustomWebUI {
     public static int countRows(String strTableXpath, String dynamicValue) {
@@ -66,5 +68,10 @@ public class CustomWebUI {
                 Utility.verifyValues("verifyStartOnTable :: at row [" + n + "]", String.valueOf(countStart), String.valueOf(expectedStart), Enums.OPERATOR.greaterThanOrEqual);
             }
         }
+    }
+
+    public static int getImageNumberUpload(String rowIndex) {
+        List<String> listGallery = getCellValuesOnTable(Controls.table, null,"Gallery", rowIndex);
+        return Utility.getNumericInString(listGallery.get(0));
     }
 }

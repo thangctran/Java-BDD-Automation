@@ -1,5 +1,7 @@
 package pages.be;
 
+import cucumber.api.java.en.Then;
+import constants.GolobalVariables;
 import utilities.Utility;
 import keywords.WebUI;
 
@@ -8,17 +10,11 @@ public class MainBEPage {
     final static String lblHeadSessions = "//div[@class='panel-heading'][//.='Booking Summary ']";
     final static String lblVisitStatistics = "//div[@class='pull-left']";
     final static String lblUser = "//div[@class='user']/span";
-    final static String mnuMenuContent = "(//ul[contains(@*,'sidebar')])[last()]/li[.//*[contains(//text(),'')]]/a";
-    final static String mnuSubMenu = "//*[./*[@aria-expanded='true']]//li/a[//text()]";
 
-    public static void goToFunction(String mainMenu, String subMenu) {
-        WebUI.click(mnuMenuContent, mainMenu);
-        if(subMenu != null) WebUI.click(mnuSubMenu, subMenu);
-    }
-
-    public static void verifyMainBEPage(String userName){
+    @Then("^BE page is displayed correctly$")
+    public static void verifyMainBEPage(){
         // 'First name + Last name'of Account displays on the left menu bar. Ex: 'Super Admin Admin'.
-        WebUI.verifyAttribute(lblUser, null, "outerText", userName);
+        WebUI.verifyAttribute(lblUser, null, "outerText", GolobalVariables.userBEName);
 
         //6 buttons
         // 'QUICK BOOKING' has red color

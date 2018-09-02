@@ -1,7 +1,11 @@
 package pages.fe;
 
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import constants.GolobalVariables;
 import keywords.WebUI;
 import utilities.Utility;
+
 
 public class MyAccountPage {
     final static String lblUserName = "//h3[@class='RTL']";
@@ -10,8 +14,9 @@ public class MyAccountPage {
     final static String lblMenuBar = "//ul[@class='nav profile-tabs']/li[./a[contains(//.,'')]]";
     final static String btnInvoice = "//div[@class='row'][.//span[@class='grey'][contains(//.,'')]]//a[text()='Invoice']";
 
-    public static void verifyMyAccountPage(String userName) {
-        WebUI.verifyAttribute(lblUserName, null, "textContent", "Hi, " + userName);
+    @Then("^My Account page is displayed$")
+    public void verifyMyAccountPage(String userName) {
+        WebUI.verifyAttribute(lblUserName, null, "textContent", "Hi, " + GolobalVariables.userName);
         WebUI.verifyAttribute(lblCurrentDay, null, "innerText", Utility.getUnique("d MMMM yyyy"));
         // verify Bookings; My Profile; Wishlist; Newsletter label
         WebUI.verifyElementPresent(lblMenuBar, "Bookings");
@@ -27,7 +32,8 @@ public class MyAccountPage {
         WebUI.verifyAttribute(lblMenuBar, "Bookings", "class", "active");;
     }
 
-    public static void clickInvoiveButton(String dynamicValue) {
+    @When("^User click on Invoice button at index \"(.*)\"$")
+    public void clickInvoiveButton(String dynamicValue) {
         WebUI.click(btnInvoice, dynamicValue);
     }
 }

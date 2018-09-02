@@ -1,8 +1,9 @@
 package commons;
 
 import java.util.List;
-import keywords.WebUI;
+import constants.Environemnts;
 import constants.Controls;
+import keywords.WebUI;
 
 public class Commons {
     final static String txtEmail = "//input[@placeholder='Email'][not(@id)]";
@@ -14,6 +15,13 @@ public class Commons {
     final static String lblDropFiles = "//span[@class='drop']";
     final static String lstSearch = "//div[@class='xcrud-nav']//*[//text()][@class]";
     final static String rdoStartGrade = "//*[./input[@name='stars']]";
+    final static String mnuMenuContent = "(//ul[contains(@*,'sidebar')])[last()]/li[.//*[contains(//text(),'')]]/a";
+    final static String mnuSubMenu = "//*[./*[@aria-expanded='true']]//li/a[//text()]";
+
+    public static void goToFunction(String mainMenu, String subMenu) {
+        WebUI.click(mnuMenuContent, mainMenu);
+        if(subMenu != null) WebUI.click(mnuSubMenu, subMenu);
+    }
 
     public static void login(String url, String email, String password) {
         if(url != null) WebUI.navigateURL(url);
@@ -40,7 +48,7 @@ public class Commons {
     public static void uploadGallery(String rowIndex, String imageUpload) {
         CustomWebUI.clickCellOnTable(Controls.table, null, "Gallery", rowIndex);
         WebUI.click(btnAddPhotos, null);
-        WebUI.upLoadFile(lblDropFiles, null, imageUpload);
+        WebUI.upLoadFile(lblDropFiles, null, Environemnts.DATA_PATH + imageUpload);
     }
 
     public static void searchRecordsOnTable(String text, String field) {
@@ -51,15 +59,15 @@ public class Commons {
         WebUI.click(lstSearch, "Go");
     }
 
-    public static void setPriceRange(Integer from, Integer to) {
+    public static void setPriceRange(String from, String to) {
         int sliderWidth = WebUI.getWidth(sldPriceRange, null);
         int posi = 0;
         if(from != null){
-            posi = (int)(sliderWidth * from / 100);
+            posi = (int)(sliderWidth * Integer.valueOf(from) / 100);
             WebUI.dragAndDrop(sldRound, "1", sldPriceRange, null, posi, 2);
         }
         if(to != null){
-            posi = (int)(sliderWidth * to / 100);
+            posi = (int)(sliderWidth * Integer.valueOf(to) / 100);
             WebUI.dragAndDrop(sldRound, "2", sldPriceRange, null, posi, 2);
         }
     }

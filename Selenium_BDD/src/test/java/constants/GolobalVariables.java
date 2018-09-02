@@ -1,6 +1,8 @@
 package constants;
 
-public class GolobalVariabes {
+import java.util.Map;
+
+public class GolobalVariables {
 
     public final static String urlBE = "https://www.phptravels.net/admin";
     public final static String emailBE = "admin@phptravels.com";
@@ -17,4 +19,5 @@ public class GolobalVariabes {
     public final static String urlCars = urlFE + "/cars";
     public final static String urlBlog = urlFE + "/blog";
     public final static String urlVisa = urlFE + "/ivisa";
+    public static Map<String,String> testData;
 }

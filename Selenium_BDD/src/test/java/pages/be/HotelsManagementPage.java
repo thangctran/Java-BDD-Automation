@@ -1,41 +1,44 @@
 package pages.be;
 
 import java.util.List;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import commons.Commons;
 import commons.CustomWebUI;
 import constants.Controls;
 import utilities.Enums;
 import utilities.Utility;
+import utilities.Variables;
 
 public class HotelsManagementPage {
-    public static String deleteHotelByButton(String rowIndex) {
-        return Commons.deleteRowByButton(rowIndex, "Name");
+
+    @When("^User deletes Hotel by Button$")
+    public void deleteHotelByButton() {
+        Variables.testData.put("hotelName", Commons.deleteRowByButton(Variables.testData.get("rowIndex"), "Name"));
     }
 
-    public static String deleteHotelByIcon(String rowIndex) {
-        return Commons.deleteRowByIcon(rowIndex, "Name");
+    @When("^User deletes Hotel by Icon$")
+    public void deleteHotelByIcon() {
+        Variables.testData.put("hotelName", Commons.deleteRowByButton(Variables.testData.get("rowIndex"), "Name"));
     }
 
-    public static void verifyHotelNameDeleted(String rowIndex, String hotelName) {
-        List<String> listName = CustomWebUI.getCellValuesOnTable(Controls.table, null, "Name", rowIndex);
-        Utility.verifyValues("verifyHotelNameDeleted", listName.get(0), hotelName, Enums.OPERATOR.notEqual);
+    @Then("^Verify User deleted a Hotel$")
+    public void verifyHotelNameDeleted() {
+        List<String> listName = CustomWebUI.getCellValuesOnTable(Controls.table, null, "Name", Variables.testData.get("rowIndex"));
+        Utility.verifyValues("verifyHotelNameDeleted", listName.get(0), Variables.testData.get("hotelName"), Enums.OPERATOR.notEqual);
     }
 
-    public static int getImageNumberUpload(String rowIndex) {
-        List<String> listGallery = CustomWebUI.getCellValuesOnTable(Controls.table, null,"Gallery", rowIndex);
-        return Utility.getNumericInString(listGallery.get(0));
-    }
-
-    public static void verifyImageNumberUploaded(String rowIndex, int expectedImageNumber) {
-        int currentNumber = getImageNumberUpload(rowIndex);
+    @Then("^Verify Image Number is uploaded$")
+    public void verifyImageNumberUploaded() {
+        int currentNumber = CustomWebUI.getImageNumberUpload(Variables.testData.get("rowIndex"));
+        int expectedImageNumber = Integer.valueOf(Variables.testData.get("imageNumber")) + 1;
         Utility.verifyValues("verifyImageNumberUploaded", String.valueOf(currentNumber), String.valueOf(expectedImageNumber), Enums.OPERATOR.equal);
     }
 
-    public static void uploadGallery(String rowIndex, String imageUpload) {
-        Commons.uploadGallery(rowIndex, imageUpload);
-    }
-
-    public static void searchRecordsOnTable(String text, String field) {
-        Commons.searchRecordsOnTable (text, field);
+    @When("^User upload a image to Hotel$")
+    public void uploadGallery() {
+        int currentNumber = CustomWebUI.getImageNumberUpload(Variables.testData.get("rowIndex"));
+        Variables.testData.put("imageNumber", String.valueOf(currentNumber));
+        Commons.uploadGallery(Variables.testData.get("rowIndex"), Variables.testData.get("imageUpload"));
     }
 }

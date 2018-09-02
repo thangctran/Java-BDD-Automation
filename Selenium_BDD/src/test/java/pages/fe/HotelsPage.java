@@ -1,21 +1,29 @@
 package pages.fe;
 
 import java.util.List;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import commons.Commons;
 import commons.CustomWebUI;
 import constants.Controls;
+import utilities.Utility;
+import utilities.Variables;
 
 public class HotelsPage {
-
-    public static void filerSearch(String startGrade, List<String> listPropertyTypes, List<String> listAmenities){
-        Commons.filerSearch(startGrade, listPropertyTypes, listAmenities, null, null );
+    @When("^User filter search Hotels$")
+    public void filerSearch(){
+        List<String> listPropertyTypes = Utility.convertStringToList(Variables.testData.get("propertyTypes"), ",");
+        List<String> listAmenities = Utility.convertStringToList(Variables.testData.get("amenities"), ",");
+        Commons.filerSearch(Variables.testData.get("star"), listPropertyTypes, listAmenities, null, null );
     }
 
-    public static void setPriceRange(Integer from, Integer to) {
-        Commons.setPriceRange(from, to);
+    @When("^User set Price Range to filter Hotels$")
+    public void setPriceRange() {
+        Commons.setPriceRange(Variables.testData.get("priceFrom"), Variables.testData.get("priceTo"));
     }
 
-    public static void verifyNumberStartHotels(String expectedStart) {
-        CustomWebUI.verifyStartOnTable(Controls.table, "bgwhite table table-striped", "1",null, expectedStart);
+    @Then("^Verify Number Star of each Hotels displayed correctly$")
+    public void verifyNumberStartHotels() {
+        CustomWebUI.verifyStartOnTable(Controls.table, "bgwhite table table-striped", "1",null, Variables.testData.get("star"));
     }
 }
