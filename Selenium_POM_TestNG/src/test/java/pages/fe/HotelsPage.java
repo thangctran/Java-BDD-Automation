@@ -11,7 +11,7 @@ public class HotelsPage {
         Commons.filerSearch(startGrade, listPropertyTypes, listAmenities, null, null );
     }
 
-    public static void setPriceRange(Integer from, Integer to) {
+    public static void setPriceRange(String from, String to) {
         Commons.setPriceRange(from, to);
     }
 

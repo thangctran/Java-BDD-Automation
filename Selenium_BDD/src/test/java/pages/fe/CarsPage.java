@@ -24,7 +24,7 @@ public class CarsPage {
         int rows = WebUI.countItemsOnList(xpathTableRow, null);
         for(int n=1; n<= rows; n++){
             String newXpath = String.format("%s[%d]%s", xpathTableRow, n, btnAirportPickup);
-            WebUI.verifyCssValue(newXpath, null, "background-color", "rgba(92, 184, 92, 1)");
+            WebUI.verifyColorElement(newXpath, null, "background-color", "#5cb85c");
         }
     }
 }

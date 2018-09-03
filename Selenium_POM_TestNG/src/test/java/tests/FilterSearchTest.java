@@ -36,7 +36,7 @@ public class FilterSearchTest {
         WebUI.navigateURL(GolobalVariabes.urlTours);
 
         Utility.logInfo("STEP", " Price range: From 0 to 60", 1);
-        ToursPage.setPriceRange(Integer.valueOf(data.get("priceFrom")), Integer.valueOf(data.get("priceTo")));
+        ToursPage.setPriceRange(data.get("priceFrom"), data.get("priceTo"));
 
         Utility.logInfo("STEP", "Filter Search: Star grade: 3; Tour Types: Holidays", 1);
         ToursPage.filerSearch(data.get("star"), data.get("tourType"));
@@ -72,7 +72,7 @@ public class FilterSearchTest {
         WebUI.navigateURL(GolobalVariabes.urlHotels);
 
         Utility.logInfo("STEP", " Price range: From 0 to 40", 1);
-        HotelsPage.setPriceRange(Integer.valueOf(data.get("priceFrom")), Integer.valueOf(data.get("priceTo")));
+        HotelsPage.setPriceRange(data.get("priceFrom"), data.get("priceTo"));
 
         Utility.logInfo("STEP", "Filter Search: Star grade; Property Types and Amenities", 1);
         HotelsPage.filerSearch(data.get("star"), listPropertyTypes, listAmenities);

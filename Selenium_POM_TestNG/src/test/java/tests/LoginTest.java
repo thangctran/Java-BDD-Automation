@@ -63,12 +63,12 @@ public class LoginTest {
         //Define test data
         Map<String, String> data = FileHelper.getTestDataRow("testData.xlsx", "login", 1);
 
+        Utility.logInfo("STEP","Click on 'LOGIN' button with invalid format email and password", 1);
+        LoginBEPage.login(GolobalVariabes.urlBE, data.get("email"), data.get("password"));
+        LoginBEPage.verifyErrorMessage(data.get("errorMessage"));
+
         Utility.logInfo("STEP","Login with blank 'Email' and 'Password'", 1);
         LoginBEPage.login(GolobalVariabes.urlBE, "", "");
         LoginBEPage.verifyWarningMessage();
-
-        Utility.logInfo("STEP","Click on 'LOGIN' button with invalid format email and password", 1);
-        LoginBEPage.login(null, data.get("email"), data.get("password"));;
-        LoginBEPage.verifyErrorMessage(data.get("error_message"));
     }
 }

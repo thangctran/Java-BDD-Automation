@@ -31,9 +31,9 @@ public class LoginBEPage {
     }
 
     @Then("^Verify Error message is displayed$")
-    public void verifyErrorMessage(String expectedMessage) {
+    public void verifyErrorMessage() {
         Utility.logInfo("STEP", "Verify Error message is displayed", 1);
-        WebUI.verifyAttribute(lblErrorMessage, null,"textContent", Variables.testData.get("error_message"));
+        WebUI.verifyAttribute(lblErrorMessage, null,"textContent", Variables.testData.get("errorMessage"));
     }
 
     @Then("^Verify Warning message is displayed$")

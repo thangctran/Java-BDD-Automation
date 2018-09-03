@@ -1,5 +1,6 @@
 package utilities;
 
+import java.awt.*;
 import java.util.*;
 import java.util.List;
 import java.util.ArrayList;
@@ -41,6 +42,13 @@ public class Utility {
 
     public static boolean isNumeric(String string) {
         return string.matches("-?\\d+(\\.\\d+)?");
+    }
+
+    public static String convertRGBtoHEX(String rgbFormat) {
+        String arrRGB[] = rgbFormat.replace("(", ",").replace(")", "").split(",");
+        Color c = new Color(Integer.valueOf(arrRGB[1].trim()),Integer.valueOf(arrRGB[2].trim()),Integer.valueOf(arrRGB[3].trim()));
+        String hexFormat = '#' + Integer.toHexString( c.getRGB() & 0x00ffffff );
+        return hexFormat.toLowerCase();
     }
 
     public static List<String> convertStringToList(String string, String delimiter) {

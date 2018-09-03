@@ -23,7 +23,7 @@ public class HotelsManagementPage {
     public void deleteHotelByIcon() {
         String rowIndex = Variables.testData.get("rowIndex");
         Utility.logInfo("STEP", "User deletes Hotel by Icon at row " + rowIndex, 1);
-        Variables.testData.put("hotelName", Commons.deleteRowByButton(rowIndex, "Name"));
+        Variables.testData.put("hotelName", Commons.deleteRowByIcon(rowIndex, "Name"));
     }
 
     @Then("^Verify User deleted a Hotel$")

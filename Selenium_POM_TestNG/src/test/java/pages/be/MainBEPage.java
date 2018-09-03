@@ -23,22 +23,22 @@ public class MainBEPage {
         //6 buttons
         // 'QUICK BOOKING' has red color
         WebUI.verifyAttribute(btnButtons, "btn btn-danger btn-block", "outerText", "QUICK BOOKING");
-        WebUI.verifyCssValue(btnButtons, "btn btn-danger btn-block", "background-color", "rgba(238, 95, 91, 1)");
+        WebUI.verifyColorElement(btnButtons, "btn btn-danger btn-block", "background-color", "#ee5f5b");
         //'BOOKINGS' has blue color
         WebUI.verifyAttribute(btnButtons, "btn btn-primary btn-block", "outerText", "BOOKINGS");
-        WebUI.verifyCssValue(btnButtons, "btn btn-primary btn-block", "background-color", "rgba(70, 109, 241, 1)");
+        WebUI.verifyColorElement(btnButtons, "btn btn-primary btn-block", "background-color", "#466df1");
         //'CMS PAGES' has light-blue color
         WebUI.verifyAttribute(btnButtons, "btn btn-info btn-block", "outerText", "  CMS PAGES");
-        WebUI.verifyCssValue(btnButtons, "btn btn-info btn-block", "background-color", "rgba(91, 192, 222, 1)");
-         //'BLOG' has green color
+        WebUI.verifyColorElement(btnButtons, "btn btn-info btn-block", "background-color", "#5bc0de");
+        //'BLOG' has green color
         WebUI.verifyAttribute(btnButtons, "btn btn-success btn-block", "outerText", "BLOG");
-        WebUI.verifyCssValue(btnButtons, "btn btn-success btn-block", "background-color", "rgba(98, 196, 98, 1)");
+        WebUI.verifyColorElement(btnButtons, "btn btn-success btn-block", "background-color", "#62c462");
         //'SEND NEWSLETTER' has yellow color
         WebUI.verifyAttribute(btnButtons, "btn btn-warning btn-block", "outerText", "SEND NEWSLETTER");
-        WebUI.verifyCssValue(btnButtons, "btn btn-warning btn-block", "background-color", "rgba(251, 180, 80, 1)");
+        WebUI.verifyColorElement(btnButtons, "btn btn-warning btn-block", "background-color", "#fbb450");
         //'BACKUP DATABASE' has white color
         WebUI.verifyAttribute(btnButtons, "btn btn-default btn-block", "outerText", "BACKUP DATABSE");
-        WebUI.verifyCssValue(btnButtons, "btn btn-default btn-block", "background-color", "rgba(255, 255, 255, 1)");
+        WebUI.verifyColorElement(btnButtons, "btn btn-default btn-block", "background-color", "#ffffff");
 
         // 4 Sessions:
         //'BOOKING SUMMARY'

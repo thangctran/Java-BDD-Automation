@@ -18,6 +18,6 @@ public class LoginFEPage {
     @Given("^User login FE page with valid email and password$")
     public void loginFE() {
         Utility.logInfo("STEP", "User login FE page with valid email and password$", 1);
-        Commons.login(GolobalVariables.urlFE, GolobalVariables.emailFE, GolobalVariables.passwordFE);
+        Commons.login(GolobalVariables.urlLogin, GolobalVariables.emailFE, GolobalVariables.passwordFE);
     }
 }

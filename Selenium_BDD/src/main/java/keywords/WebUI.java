@@ -314,6 +314,14 @@ public class WebUI extends Driver {
         Utility.verifyValues("verifyCssValue :: [" + attribute + "]:[" + newXpath + "]", currentValue, expectedValue, Enums.OPERATOR.equal);
     }
 
+    public static void verifyColorElement(String strXpath, String dynamicValue, String attribute, String expectedHexColor) {
+        //attribute: color; background-color; border-color
+        String newXpath = Utility.convertXpath(strXpath, dynamicValue);
+        String currentRGB = driver.findElement(By.xpath(newXpath)).getCssValue(attribute).trim();
+        String hexColor = Utility.convertRGBtoHEX(currentRGB);
+        Utility.verifyValues("verifyColorElement :: [" + attribute + "]:[" + newXpath + "]", hexColor, expectedHexColor, Enums.OPERATOR.equal);
+    }
+
     public static void verifyCssValueOnList(String strListXpath, String dynamicValue, String attribute, String expectedValue) {
         String newXpath = Utility.convertXpath(strListXpath, dynamicValue);
         List<WebElement> wListRows = driver.findElements(By.xpath(newXpath));

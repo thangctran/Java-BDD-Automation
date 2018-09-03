@@ -51,15 +51,15 @@ public class Commons {
         WebUI.click(lstSearch, "Go");
     }
 
-    public static void setPriceRange(Integer from, Integer to) {
+    public static void setPriceRange(String from, String to) {
         int sliderWidth = WebUI.getWidth(sldPriceRange, null);
         int posi = 0;
         if(from != null){
-            posi = (int)(sliderWidth * from / 100);
+            posi = (int)(sliderWidth * Integer.valueOf(from) / 100);
             WebUI.dragAndDrop(sldRound, "1", sldPriceRange, null, posi, 2);
         }
         if(to != null){
-            posi = (int)(sliderWidth * to / 100);
+            posi = (int)(sliderWidth * Integer.valueOf(to) / 100);
             WebUI.dragAndDrop(sldRound, "2", sldPriceRange, null, posi, 2);
         }
     }

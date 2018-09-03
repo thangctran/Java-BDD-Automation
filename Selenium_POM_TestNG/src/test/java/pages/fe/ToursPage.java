@@ -10,7 +10,7 @@ public class ToursPage {
         Commons.filerSearch(startGrade, null, null, tourType, null );
     }
 
-    public static void setPriceRange(Integer from, Integer to) {
+    public static void setPriceRange(String from, String to) {
         Commons.setPriceRange(from, to);
     }
 

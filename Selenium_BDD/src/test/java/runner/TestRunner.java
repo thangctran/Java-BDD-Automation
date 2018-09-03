@@ -12,7 +12,7 @@ import keywords.WebUI;
 @CucumberOptions(
         features = "classpath:features",
         glue = {"pages", "runner"},
-        plugin = { "pretty", "html:src/test/resources/reports/cucumber-html-reports"}
+        plugin = { "pretty", "html:target/cucumber-html-reports"}
 )
 
 public class TestRunner {

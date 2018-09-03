@@ -1,0 +1,49 @@
+2018/09/03 22:51:29.058 [TESTCASE] *** Execute TestCase: FE002-Tours - Verify Tours Filter ***
+2018/09/03 22:51:29.083 [STEP] Navigate to url 'https://www.phptravels.net/tours'
+2018/09/03 22:51:29.099 [INFO] navigateURL :: [https://www.phptravels.net/tours]
+2018/09/03 22:51:33.941 [STEP]  Price range: From 0 to 60
+2018/09/03 22:51:34.222 [INFO] getWidth :: [//div[@class='slider-track']]
+2018/09/03 22:51:34.329 [INFO] drag :: [(//div[@class='slider-handle round'])[1]]
+2018/09/03 22:51:34.381 [INFO] drop :: [//div[@class='slider-track']]
+2018/09/03 22:51:34.923 [INFO] drag :: [(//div[@class='slider-handle round'])[2]]
+2018/09/03 22:51:34.966 [INFO] drop :: [//div[@class='slider-track']]
+2018/09/03 22:51:35.201 [STEP] Filter Search: Star grade: 3; Tour Types: Holidays
+2018/09/03 22:51:35.209 [INFO] click :: [(//*[./input[@name='stars']])[3]]
+2018/09/03 22:51:35.308 [INFO] click :: [//*[./input[@type='radio'][@*='Holidays']]/ins]
+2018/09/03 22:51:35.438 [INFO] click :: [//button[text()='Search']]
+2018/09/03 22:51:37.035 [STEP] Tour Type of each Hotels is 'Holidays
+2018/09/03 22:51:37.146 [PASSED] verifyAttributeOnList :: [textContent]:[//*[./strong[text()='Tour Type']]/a[1]] :: [Holidays] = [Holidays]
+2018/09/03 22:51:37.377 [TESTCASE] *** End TestCase: FE002-Tours - Verify Tours Filter ***
+2018/09/03 22:51:37.388 [TESTCASE] *** Execute TestCase: FE003-Cars - Verify Cars Filter ***
+2018/09/03 22:51:37.411 [STEP] Navigate to url 'https://www.phptravels.net/cars'
+2018/09/03 22:51:37.418 [INFO] navigateURL :: [https://www.phptravels.net/cars]
+2018/09/03 22:51:38.835 [STEP] Filter Search: Star grade: 4; Car Types: Standard; Airport Pickup: Yes
+2018/09/03 22:51:38.852 [INFO] click :: [(//*[./input[@name='stars']])[4]]
+2018/09/03 22:51:39.069 [INFO] click :: [//*[./input[@type='radio'][@*='Standard']]/ins]
+2018/09/03 22:51:39.303 [INFO] selectOptionByText :: [Yes] :: [//select[@*='pickup']]
+2018/09/03 22:51:39.638 [INFO] click :: [//button[text()='Search']]
+2018/09/03 22:51:41.686 [STEP] Airport Pickup displays for each Casr with green backgourd-color
+2018/09/03 22:51:41.890 [PASSED] verifyColorElement :: [background-color]:[//table[@*='bgwhite table table-striped']/*/tr[1]//button[.=' Airport Pickup']] :: [#5cb85c] = [#5cb85c]
+2018/09/03 22:51:42.223 [TESTCASE] *** End TestCase: FE003-Cars - Verify Cars Filter ***
+2018/09/03 22:51:42.235 [TESTCASE] *** Execute TestCase: FE005-Hotels - Verify Hotel Filter ***
+2018/09/03 22:51:42.265 [STEP] Navigate to url 'https://www.phptravels.net/hotels'
+2018/09/03 22:51:42.276 [INFO] navigateURL :: [https://www.phptravels.net/hotels]
+2018/09/03 22:51:44.667 [STEP]  Price range: From 0 to 40
+2018/09/03 22:51:44.682 [INFO] getWidth :: [//div[@class='slider-track']]
+2018/09/03 22:51:44.746 [INFO] drag :: [(//div[@class='slider-handle round'])[1]]
+2018/09/03 22:51:44.782 [INFO] drop :: [//div[@class='slider-track']]
+2018/09/03 22:51:45.369 [INFO] drag :: [(//div[@class='slider-handle round'])[2]]
+2018/09/03 22:51:45.419 [INFO] drop :: [//div[@class='slider-track']]
+2018/09/03 22:51:45.775 [STEP] Filter Search: Star grade; Property Types and Amenities
+2018/09/03 22:51:45.785 [INFO] click :: [(//*[./input[@name='stars']])[4]]
+2018/09/03 22:51:45.874 [INFO] selectCheckbox :: [true] :: [//*[./input[@type='checkbox'][@*='Hotel']]/ins]
+2018/09/03 22:51:45.996 [INFO] selectCheckbox :: [true] :: [//*[./input[@type='checkbox'][@*='Villa']]/ins]
+2018/09/03 22:51:46.138 [INFO] selectCheckbox :: [true] :: [//*[./input[@type='checkbox'][@*='Night Club']]/ins]
+2018/09/03 22:51:46.320 [INFO] selectCheckbox :: [true] :: [//*[./input[@type='checkbox'][@*='Restaurant']]/ins]
+2018/09/03 22:51:46.471 [INFO] click :: [//button[text()='Search']]
+2018/09/03 22:51:48.723 [STEP] Number Start of each Hotel is from 4 to 5 starts
+2018/09/03 22:51:48.828 [PASSED] verifyStartOnTable :: at row [1] :: [4] >= [4]
+2018/09/03 22:51:48.871 [PASSED] verifyStartOnTable :: at row [2] :: [5] >= [4]
+2018/09/03 22:51:48.943 [PASSED] verifyStartOnTable :: at row [3] :: [4] >= [4]
+2018/09/03 22:51:49.091 [TESTCASE] *** End TestCase: FE005-Hotels - Verify Hotel Filter ***
+2018/09/03 22:51:49.107 [INFO] closeDriver
