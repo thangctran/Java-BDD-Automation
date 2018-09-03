@@ -2,11 +2,11 @@ Feature: BE - Verify Login on BE page
 
 Scenario: BE001-Login-Login to page successful
     Given User login BE page with valid email and password
-    Then  BE page is displayed correctly
+    Then  Verify BE page is displayed correctly
 
 Scenario: BE002-Login-Login to page unsuccessful
     Given User uses test data: CSV files "be\\BE002.csv", delimiter ",", at row "1"
     And   User login BE page with valid email and password
-    Then  Error message is displayed
+    Then  Verify Error message is displayed
     Given User login BE page with blank email and password
-    Then  Warning message is displayed
+    Then  Verify Warning message is displayed

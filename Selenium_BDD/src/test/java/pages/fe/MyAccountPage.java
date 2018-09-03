@@ -6,7 +6,6 @@ import constants.GolobalVariables;
 import keywords.WebUI;
 import utilities.Utility;
 
-
 public class MyAccountPage {
     final static String lblUserName = "//h3[@class='RTL']";
     final static String lblCurrentDay = "//span[@class='h4']";
@@ -14,8 +13,9 @@ public class MyAccountPage {
     final static String lblMenuBar = "//ul[@class='nav profile-tabs']/li[./a[contains(//.,'')]]";
     final static String btnInvoice = "//div[@class='row'][.//span[@class='grey'][contains(//.,'')]]//a[text()='Invoice']";
 
-    @Then("^My Account page is displayed$")
-    public void verifyMyAccountPage(String userName) {
+    @Then("^Verify My Account page is displayed$")
+    public void verifyMyAccountPage() {
+        Utility.logInfo("STEP", "Verify My Account page is displayed", 1);
         WebUI.verifyAttribute(lblUserName, null, "textContent", "Hi, " + GolobalVariables.userName);
         WebUI.verifyAttribute(lblCurrentDay, null, "innerText", Utility.getUnique("d MMMM yyyy"));
         // verify Bookings; My Profile; Wishlist; Newsletter label

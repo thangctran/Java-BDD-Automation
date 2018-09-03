@@ -14,18 +14,25 @@ public class HotelsManagementPage {
 
     @When("^User deletes Hotel by Button$")
     public void deleteHotelByButton() {
-        Variables.testData.put("hotelName", Commons.deleteRowByButton(Variables.testData.get("rowIndex"), "Name"));
+        String rowIndex = Variables.testData.get("rowIndex");
+        Utility.logInfo("STEP", "User deletes Hotel by Button at row " + rowIndex, 1);
+        Variables.testData.put("hotelName", Commons.deleteRowByButton(rowIndex, "Name"));
     }
 
     @When("^User deletes Hotel by Icon$")
     public void deleteHotelByIcon() {
-        Variables.testData.put("hotelName", Commons.deleteRowByButton(Variables.testData.get("rowIndex"), "Name"));
+        String rowIndex = Variables.testData.get("rowIndex");
+        Utility.logInfo("STEP", "User deletes Hotel by Icon at row " + rowIndex, 1);
+        Variables.testData.put("hotelName", Commons.deleteRowByButton(rowIndex, "Name"));
     }
 
     @Then("^Verify User deleted a Hotel$")
     public void verifyHotelNameDeleted() {
-        List<String> listName = CustomWebUI.getCellValuesOnTable(Controls.table, null, "Name", Variables.testData.get("rowIndex"));
-        Utility.verifyValues("verifyHotelNameDeleted", listName.get(0), Variables.testData.get("hotelName"), Enums.OPERATOR.notEqual);
+        String hotelName = Variables.testData.get("hotelName");
+        String rowIndex = Variables.testData.get("rowIndex");
+        Utility.logInfo("STEP", "Verify User deleted '" + hotelName + "' hotel at row " + rowIndex, 1);
+        List<String> listName = CustomWebUI.getCellValuesOnTable(Controls.table, null, "Name", rowIndex);
+        Utility.verifyValues("verifyHotelNameDeleted", listName.get(0), hotelName, Enums.OPERATOR.notEqual);
     }
 
     @Then("^Verify Image Number is uploaded$")

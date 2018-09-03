@@ -9,12 +9,12 @@ import utilities.Utility;
 public class CustomHook {
     @Before
     public void beforeScenario(Scenario scenario) {
-        Utility.logInfo("TESTCASE","*** Execute TestCase:  ***" + scenario.getName(), 1);
+        Utility.logInfo("TESTCASE","*** Execute TestCase: " + scenario.getName() + " ***", 1);
     }
 
     @After
     public void afterScenario(Scenario scenario) {
         WebUI.deleteAllCookies();
-        Utility.logInfo("TESTCASE","*** End TestCase:  ***" + scenario.getName(), 1);
+        Utility.logInfo("TESTCASE","*** End TestCase: " + scenario.getName() + " ***", 1);
     }
 }

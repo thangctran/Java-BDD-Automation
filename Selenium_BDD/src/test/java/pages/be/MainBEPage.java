@@ -11,8 +11,9 @@ public class MainBEPage {
     final static String lblVisitStatistics = "//div[@class='pull-left']";
     final static String lblUser = "//div[@class='user']/span";
 
-    @Then("^BE page is displayed correctly$")
+    @Then("^Verify BE page is displayed correctly$")
     public static void verifyMainBEPage(){
+        Utility.logInfo("STEP", "Verify BE page is displayed correctly", 1);
         // 'First name + Last name'of Account displays on the left menu bar. Ex: 'Super Admin Admin'.
         WebUI.verifyAttribute(lblUser, null, "outerText", GolobalVariables.userBEName);
 

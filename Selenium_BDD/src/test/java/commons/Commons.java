@@ -20,7 +20,7 @@ public class Commons {
 
     public static void goToFunction(String mainMenu, String subMenu) {
         WebUI.click(mnuMenuContent, mainMenu);
-        if(subMenu != null) WebUI.click(mnuSubMenu, subMenu);
+        if(subMenu != null && subMenu != "") WebUI.click(mnuSubMenu, subMenu);
     }
 
     public static void login(String url, String email, String password) {

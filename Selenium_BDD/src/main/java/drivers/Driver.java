@@ -31,17 +31,17 @@ public class Driver {
         WebDriver driverTest;
         switch (browser.toLowerCase()) { // check our browser
             case "firefox": {
-                System.setProperty("webdriver.firefox.marionette", Environemnts.DRIVER_PATH + "\\geckodriver.exe");
+                System.setProperty("webdriver.firefox.marionette", Environemnts.DRIVER_PATH + "geckodriver.exe");
                 driverTest = new FirefoxDriver();
                 break;
             }
             case "edge": {
-                System.setProperty("webdriver.edge.driver", Environemnts.DRIVER_PATH + "\\/MicrosoftWebDriver.exe");
+                System.setProperty("webdriver.edge.driver", Environemnts.DRIVER_PATH + "MicrosoftWebDriver.exe");
                 driverTest = new EdgeDriver();
                 break;
             }
             case "ie": {
-                System.setProperty("webdriver.ie.driver", Environemnts.DRIVER_PATH + "\\IEDriverServer.exe");
+                System.setProperty("webdriver.ie.driver", Environemnts.DRIVER_PATH + "IEDriverServer.exe");
                 driverTest = new InternetExplorerDriver();
                 break;
             }
@@ -51,7 +51,7 @@ public class Driver {
             }
             // if our browser is not listed, throw an error
             default: {
-                System.setProperty("webdriver.chrome.driver", Environemnts.DRIVER_PATH + "\\chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver", Environemnts.DRIVER_PATH + "chromedriver.exe");
                 driverTest = new ChromeDriver();
             }
         }

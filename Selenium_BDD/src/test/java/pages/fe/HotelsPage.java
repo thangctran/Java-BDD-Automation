@@ -12,18 +12,15 @@ import utilities.Variables;
 public class HotelsPage {
     @When("^User filter search Hotels$")
     public void filerSearch(){
+        Utility.logInfo("STEP", "User filter search Hotels", 1);
         List<String> listPropertyTypes = Utility.convertStringToList(Variables.testData.get("propertyTypes"), ",");
         List<String> listAmenities = Utility.convertStringToList(Variables.testData.get("amenities"), ",");
         Commons.filerSearch(Variables.testData.get("star"), listPropertyTypes, listAmenities, null, null );
     }
 
-    @When("^User set Price Range to filter Hotels$")
-    public void setPriceRange() {
-        Commons.setPriceRange(Variables.testData.get("priceFrom"), Variables.testData.get("priceTo"));
-    }
-
     @Then("^Verify Number Star of each Hotels displayed correctly$")
     public void verifyNumberStartHotels() {
+        Utility.logInfo("STEP", "Verify Number Star of each Hotels displayed correctly", 1);
         CustomWebUI.verifyStartOnTable(Controls.table, "bgwhite table table-striped", "1",null, Variables.testData.get("star"));
     }
 }
