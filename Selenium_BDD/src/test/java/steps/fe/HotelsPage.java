@@ -1,4 +1,4 @@
-package pages.fe;
+package steps.fe;
 
 import java.util.List;
 import cucumber.api.java.en.Then;

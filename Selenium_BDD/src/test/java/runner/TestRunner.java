@@ -11,7 +11,7 @@ import keywords.WebUI;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "classpath:features",
-        glue = {"pages", "runner"},
+        glue = {"steps", "runner"},
         plugin = { "pretty", "html:target/cucumber-html-reports"}
 )
 

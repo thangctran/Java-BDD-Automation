@@ -1,4 +1,4 @@
-package pages.be;
+package steps.be;
 
 import java.util.List;
 import cucumber.api.java.en.Then;

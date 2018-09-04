@@ -1,4 +1,4 @@
-package pages.be;
+package steps.be;
 
 import cucumber.api.java.en.Then;
 import constants.GolobalVariables;
