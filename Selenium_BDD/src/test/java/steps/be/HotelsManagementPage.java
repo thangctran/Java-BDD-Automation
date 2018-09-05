@@ -37,6 +37,7 @@ public class HotelsManagementPage {
 
     @Then("^Verify Image Number is uploaded$")
     public void verifyImageNumberUploaded() {
+        Utility.logInfo("STEP", "User deletes Hotel by Button at row " + Variables.testData.get("rowIndex"), 1);
         int currentNumber = CustomWebUI.getImageNumberUpload(Variables.testData.get("rowIndex"));
         int expectedImageNumber = Integer.valueOf(Variables.testData.get("imageNumber")) + 1;
         Utility.verifyValues("verifyImageNumberUploaded", String.valueOf(currentNumber), String.valueOf(expectedImageNumber), Enums.OPERATOR.equal);
@@ -44,6 +45,7 @@ public class HotelsManagementPage {
 
     @When("^User upload a image to Hotel$")
     public void uploadGallery() {
+        Utility.logInfo("STEP", "User upload a image to Hotel at row " + Variables.testData.get("rowIndex"), 1);
         int currentNumber = CustomWebUI.getImageNumberUpload(Variables.testData.get("rowIndex"));
         Variables.testData.put("imageNumber", String.valueOf(currentNumber));
         Commons.uploadGallery(Variables.testData.get("rowIndex"), Variables.testData.get("imageUpload"));
