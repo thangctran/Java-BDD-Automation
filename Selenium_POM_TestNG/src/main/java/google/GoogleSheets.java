@@ -24,7 +24,6 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
-import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.SheetsScopes;
 import com.google.api.services.sheets.v4.model.UpdateValuesResponse;
@@ -34,30 +33,21 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import static drivers.Driver.googelSheetName;
 
 public class GoogleSheets {
-    private static final String APPLICATION_NAME = "Google Sheets API Java Quickstart";
+    private static final String APPLICATION_NAME = "Google Sheets API Java";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     private static final String TOKENS_DIRECTORY_PATH = "tokens";
     private static final String SPREADSHEET_ID = "1UwclfT7WzOvtQA7qa5o2KdATal8LIWO1yLkQss6tXj4";
-    private static final java.io.File DATA_STORE_DIR = new java.io.File(
-            System.getProperty("user.home"), ".credentials/2/sheets.googleapis.com-java-quickstart.json");
-    private static final List<String> SCOPES = Arrays.asList(SheetsScopes.SPREADSHEETS,SheetsScopes.DRIVE);
-//    private static final List<String> SCOPES = Arrays.asList(DriveScopes.DRIVE_SCRIPTS);
-//private static final java.util.Collection<String> SCOPES = DriveScopes.all();
     /**
      * Global instance of the scopes required by this quickstart.
      * If modifying these scopes, delete your previously saved tokens/ folder.
      */
-//    private static final List<String> SCOPES = Collections.singletonList(SheetsScopes.DRIVE);
-//    private static final List<String> SCOPES = Collections.singletonList(SheetsScopes.SPREADSHEETS_READONLY);
+    private static final List<String> SCOPES = Arrays.asList(SheetsScopes.SPREADSHEETS, SheetsScopes.DRIVE);
     private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
-//    private static final java.io.File CREDENTIALS_FILE_PATH = new java.io.File(
-//            System.getProperty("user.home"), ".credentials/2/sheets.googleapis.com-java-quickstart.json");
 
     /**
      * Creates an authorized Credential object.
@@ -79,7 +69,7 @@ public class GoogleSheets {
         return new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
     }
 
-    public static Sheets getSheetsService() throws IOException, GeneralSecurityException {
+    private static Sheets getSheetsService() throws IOException, GeneralSecurityException {
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         return new Sheets.Builder(
                 HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
@@ -87,35 +77,39 @@ public class GoogleSheets {
                 .build();
     }
 
-    /**
-     * Prints the names and majors of students in a sample spreadsheet:
-     * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
-     */
-    public static void main(String... args) throws IOException, GeneralSecurityException {
-
-        final String range = "UI-Report-Firefox!A1:E";
-                ValueRange response = getSheetsService().spreadsheets().values()
-                .get(SPREADSHEET_ID, range)
-                .execute();
-        List<List<Object>> values = response.getValues();
-                    for (List row : values) {
-                // Print columns A and E, which correspond to indices 0 and 4.
-                System.out.printf("%s, %s\n", row.get(1), row.get(4));
-            }
-
-        final String range1 = "UI-Report-Firefox!A3:E";
-        ValueRange body = new ValueRange()
-                .setValues(Arrays.asList(
-                        Arrays.asList("Expenses January"),
-                        Arrays.asList("books", "30"),
-                        Arrays.asList("pens", "10"),
-                        Arrays.asList("Expenses February"),
-                        Arrays.asList("clothes", "20"),
-                        Arrays.asList("shoes", "5")));
+    private static void setCellValue(String sheetName, String columnName, int rowIndex, String value) throws IOException, GeneralSecurityException{
+        String range = sheetName + "!" + columnName + rowIndex;//"UI-Report-Firefox!A2";
+        ValueRange body = new ValueRange().setValues(Arrays.asList(Arrays.asList(value)));
         UpdateValuesResponse result = getSheetsService().spreadsheets().values()
-                .update(SPREADSHEET_ID, range1, body)
+                .update(SPREADSHEET_ID, range, body)
                 .setValueInputOption("RAW")
                 .execute();
     }
+
+    public static String getCellValue(String sheetName, String columnName, int rowIndex) throws IOException, GeneralSecurityException{
+        String range = sheetName + "!" + columnName + rowIndex;//"UI-Report-Firefox!A2";
+        ValueRange response = getSheetsService().spreadsheets().values()
+                .get(SPREADSHEET_ID, range)
+                .execute();
+        if(response.getValues() != null) return String.valueOf(response.getValues().get(0).get(0));
+        else return null;
+    }
+
+    //Update to google sheet: https://docs.google.com/spreadsheets/d/1UwclfT7WzOvtQA7qa5o2KdATal8LIWO1yLkQss6tXj4/edit#gid=0
+    public static void updateTestCaseStatus(String testCaseName, String startDate, String status) throws IOException, GeneralSecurityException{
+        String range = googelSheetName + "!A:A";
+        ValueRange response = getSheetsService().spreadsheets().values()
+                .get(SPREADSHEET_ID, range)
+                .execute();
+        List<String> testCase = Arrays.asList(testCaseName);
+        int findRowIndex = response.getValues().indexOf(testCase);
+        if(findRowIndex <= 0) {
+            findRowIndex = response.getValues().size() + 1;
+            setCellValue(googelSheetName, "A", findRowIndex, testCaseName);
+        }
+        setCellValue(googelSheetName, "C", findRowIndex, startDate);
+        setCellValue(googelSheetName, "E", findRowIndex, status);
+    }
+
 }
 // [END sheets_quickstart]

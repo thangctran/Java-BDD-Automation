@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Login Page Test Suite" verbose="1" preserve-order="true" parallel="none">
     <listeners>
-        <listener class-name="utilities.InitTestSuite" />
+        <listener class-name="utilities.InitTestCase" />
         <listener class-name="org.uncommons.reportng.HTMLReporter"/>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
     </listeners>
