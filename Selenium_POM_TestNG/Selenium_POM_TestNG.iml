@@ -67,5 +67,6 @@
     <orderEntry type="library" name="Maven: org.mortbay.jetty:jetty-util:6.1.26" level="project" />
     <orderEntry type="library" name="Maven: org.mortbay.jetty:servlet-api:2.5-20081211" level="project" />
     <orderEntry type="library" name="Maven: com.google.apis:google-api-services-sheets:v4-rev493-1.23.0" level="project" />
+    <orderEntry type="library" name="Maven: com.google.apis:google-api-services-drive:v2-rev65-1.13.2-beta" level="project" />
   </component>
 </module>
