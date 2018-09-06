@@ -12,7 +12,7 @@ public class InitTestCase extends TestListenerAdapter{
     // Override to custom onTestStart function of TestNG
     @Override
     public void onTestStart(ITestResult itr) {
-        startDate = Utility.getUnique("yyyy/MM/dd HH:mm:ss.SSS");
+        startDate = Utility.getUnique("yyyy/MM/dd HH:mm:ss");
         Utility.logInfo("TESTCASE","*** Execute TestCase: " + itr.getMethod().getDescription() + " ***", 1);
     }
 

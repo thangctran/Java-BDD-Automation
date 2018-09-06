@@ -26,6 +26,7 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.SheetsScopes;
+import com.google.api.services.sheets.v4.model.AppendValuesResponse;
 import com.google.api.services.sheets.v4.model.UpdateValuesResponse;
 import com.google.api.services.sheets.v4.model.ValueRange;
 
@@ -35,6 +36,7 @@ import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
 import java.util.Arrays;
 import java.util.List;
+import static utilities.Utility.getUnique;
 import static drivers.Driver.googelSheetName;
 
 public class GoogleSheets {
@@ -77,7 +79,7 @@ public class GoogleSheets {
                 .build();
     }
 
-    private static void setCellValue(String sheetName, String columnName, int rowIndex, String value) throws IOException, GeneralSecurityException{
+    public static void setCellValue(String sheetName, String columnName, int rowIndex, String value) throws IOException, GeneralSecurityException{
         String range = sheetName + "!" + columnName + rowIndex;//"UI-Report-Firefox!A2";
         ValueRange body = new ValueRange().setValues(Arrays.asList(Arrays.asList(value)));
         UpdateValuesResponse result = getSheetsService().spreadsheets().values()
@@ -111,5 +113,19 @@ public class GoogleSheets {
         setCellValue(googelSheetName, "E", findRowIndex, status);
     }
 
+    public static void insertColumnTestStatus() throws IOException, GeneralSecurityException{
+        String range = "UI-Report-Chrome!E1:E";//googelSheetName + "!E1:E";
+        String startDate = getUnique("yyyy/MM/dd HH:mm:ss");
+        ValueRange body = new ValueRange().setValues(Arrays.asList(Arrays.asList(startDate)));
+        AppendValuesResponse appendResult = getSheetsService().spreadsheets().values()
+                .append(SPREADSHEET_ID, range, body)
+                .setValueInputOption("USER_ENTERED")
+                .setInsertDataOption("INSERT_ROWS")
+                .setIncludeValuesInResponse(true)
+                .execute();
+    }
+//    public static void main(String... args) throws IOException, GeneralSecurityException {
+//        insertColumnTestStatus();
+//    }
 }
 // [END sheets_quickstart]
