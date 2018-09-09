@@ -104,6 +104,7 @@ public class WebUI extends Driver {
             e.printStackTrace();
         }
     }
+
     ///////////////////////////Element keywords/////////////////////////////////
     public static void waitForPresent(String strXpath, int iTimeOut) {
         try {
@@ -111,7 +112,7 @@ public class WebUI extends Driver {
             WebElement a = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(strXpath)));
             Utility.logInfo("DEBUG", "waitForPresent :: appear [" + strXpath + "]", 0);
         } catch (Exception e) {
-            Utility.logInfo("DEBUG", "waitForPresent :: disappear [" + strXpath + "]", 0);
+            e.printStackTrace();
         }
     }
 
@@ -203,7 +204,7 @@ public class WebUI extends Driver {
             robot.keyRelease(keycode);
             Thread.sleep(2000);
         } catch (Exception e){
-            Utility.logInfo("ERROR", "pressKeyByRobot :: " + e.getMessage(), 1);
+            e.printStackTrace();
         }
     }
 
@@ -227,7 +228,7 @@ public class WebUI extends Driver {
             robot.keyRelease(KeyEvent.VK_ENTER);
             Thread.sleep(2000);
         } catch (Exception e){
-            Utility.logInfo("ERROR", "typeKeysByRobot :: " + e.getMessage(), 1);
+            e.printStackTrace();
         }
     }
 

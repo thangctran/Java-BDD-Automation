@@ -37,7 +37,7 @@ import java.security.GeneralSecurityException;
 import java.util.Arrays;
 import java.util.List;
 import static utilities.Utility.getUnique;
-import static drivers.Driver.googelSheetName;
+import static drivers.Driver.googleSheetName;
 
 public class GoogleSheets {
     private static final String APPLICATION_NAME = "Google Sheets API Java";
@@ -98,8 +98,8 @@ public class GoogleSheets {
     }
 
     //Update to google sheet: https://docs.google.com/spreadsheets/d/1UwclfT7WzOvtQA7qa5o2KdATal8LIWO1yLkQss6tXj4/edit#gid=0
-    public static void updateTestCaseStatus(String testCaseName, String startDate, String status) throws IOException, GeneralSecurityException{
-        String range = googelSheetName + "!A:A";
+    public static void updateTestCaseStatus(String testCaseName, String startDate, String duration, String status) throws IOException, GeneralSecurityException{
+        String range = googleSheetName + "!A:A";
         ValueRange response = getSheetsService().spreadsheets().values()
                 .get(SPREADSHEET_ID, range)
                 .execute();
@@ -107,14 +107,15 @@ public class GoogleSheets {
         int findRowIndex = response.getValues().indexOf(testCase);
         if(findRowIndex <= 0) {
             findRowIndex = response.getValues().size() + 1;
-            setCellValue(googelSheetName, "A", findRowIndex, testCaseName);
+            setCellValue(googleSheetName, "A", findRowIndex, testCaseName);
         }
-        setCellValue(googelSheetName, "C", findRowIndex, startDate);
-        setCellValue(googelSheetName, "E", findRowIndex, status);
+        setCellValue(googleSheetName, "C", findRowIndex, startDate);
+        setCellValue(googleSheetName, "D", findRowIndex, duration);
+        setCellValue(googleSheetName, "F", findRowIndex, status);
     }
 
     public static void insertColumnTestStatus() throws IOException, GeneralSecurityException{
-        String range = "UI-Report-Chrome!E1:E";//googelSheetName + "!E1:E";
+        String range = "UI-Report-Chrome!E1:E";//googleSheetName + "!E1:E";
         String startDate = getUnique("yyyy/MM/dd HH:mm:ss");
         ValueRange body = new ValueRange().setValues(Arrays.asList(Arrays.asList(startDate)));
         AppendValuesResponse appendResult = getSheetsService().spreadsheets().values()

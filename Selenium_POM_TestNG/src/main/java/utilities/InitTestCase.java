@@ -9,10 +9,12 @@ import google.GoogleSheets;
 
 public class InitTestCase extends TestListenerAdapter{
     static String startDate;
+    static long startTime;
     // Override to custom onTestStart function of TestNG
     @Override
     public void onTestStart(ITestResult itr) {
         startDate = Utility.getUnique("yyyy/MM/dd HH:mm:ss");
+        startTime = System.currentTimeMillis();
         Utility.logInfo("TESTCASE","*** Execute TestCase: " + itr.getMethod().getDescription() + " ***", 1);
     }
 
@@ -57,7 +59,10 @@ public class InitTestCase extends TestListenerAdapter{
         }
         try {
             //Update to google sheet: https://docs.google.com/spreadsheets/d/1UwclfT7WzOvtQA7qa5o2KdATal8LIWO1yLkQss6tXj4/edit#gid=0
-            GoogleSheets.updateTestCaseStatus(itr.getMethod().getDescription(), startDate, testResult);
+            long millis = System.currentTimeMillis() - startTime;
+            // convert duration format ("HH:mm:ss.SSS")
+            String duration = String.format("%02d:%02d:%02d.%03d", millis / 3600000, ((millis/1000) % 3600) / 60, ((millis/1000) % 60), (millis % 1000));
+            GoogleSheets.updateTestCaseStatus(itr.getMethod().getDescription(), startDate, duration, testResult);
         } catch (Exception e) {
             e.printStackTrace();
         }

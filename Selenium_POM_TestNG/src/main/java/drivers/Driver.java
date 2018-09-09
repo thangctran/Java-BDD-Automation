@@ -15,7 +15,7 @@ import utilities.Utility;
 
 public class Driver {
     static WebDriver driver;
-    public static String googelSheetName;
+    public static String googleSheetName;
 
     public static void setDriver(WebDriver driverTest) {
         if (driver == null) driver = driverTest;
@@ -32,31 +32,31 @@ public class Driver {
         WebDriver driverTest;
         switch (browser.toLowerCase()) { // check our browser
             case "firefox": {
-                googelSheetName = "UI-Report-Firefox";
+                googleSheetName = "UI-Report-Firefox";
                 System.setProperty("webdriver.firefox.marionette", Environemnts.DRIVER_PATH + "\\geckodriver.exe");
                 driverTest = new FirefoxDriver();
                 break;
             }
             case "edge": {
-                googelSheetName = "UI-Report-Edge";
+                googleSheetName = "UI-Report-Edge";
                 System.setProperty("webdriver.edge.driver", Environemnts.DRIVER_PATH + "\\/MicrosoftWebDriver.exe");
                 driverTest = new EdgeDriver();
                 break;
             }
             case "ie": {
-                googelSheetName = "UI-Report-IE";
+                googleSheetName = "UI-Report-IE";
                 System.setProperty("webdriver.ie.driver", Environemnts.DRIVER_PATH + "\\IEDriverServer.exe");
                 driverTest = new InternetExplorerDriver();
                 break;
             }
             case "safari": {
-                googelSheetName = "UI-Report-Firefox";
+                googleSheetName = "UI-Report-Firefox";
                 driverTest = new SafariDriver();
                 break;
             }
             // if our browser is not listed, throw an error
             default: {
-                googelSheetName = "UI-Report-Chrome";
+                googleSheetName = "UI-Report-Chrome";
                 System.setProperty("webdriver.chrome.driver", Environemnts.DRIVER_PATH + "\\chromedriver.exe");
                 driverTest = new ChromeDriver();
             }
