@@ -1,1 +1,1 @@
-mvn -Dtests=HotelsManagementPageTest.xml test
+mvn -Dtests=HotelsManagementPageTest.xml -Dbrowser=chrome test

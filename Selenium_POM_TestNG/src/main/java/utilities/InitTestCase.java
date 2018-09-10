@@ -2,7 +2,7 @@ package utilities;
 
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
-import constants.Environemnts;
+import constants.Environments;
 import keywords.WebUI;
 import helpers.FileHelper;
 import google.GoogleSheets;
@@ -22,8 +22,9 @@ public class InitTestCase extends TestListenerAdapter{
     @Override
     public void onTestFailure(ITestResult itr) {
         String captureImage = FileHelper.getXmlNodeValue("//Configuration/CaptureImage/text()",0);
+
         if(captureImage.toLowerCase() != "false") {
-            WebUI.captureScreen(Environemnts.REPORTS_PATH + "images\\" + itr.getName() + "_" + Utility.getUnique("yyMMdd_HHmmss") + ".png");
+            WebUI.captureScreen(Environments.REPORTS_PATH + "images\\" + itr.getName() + "_" + Utility.getUnique("yyMMdd_HHmmss") + ".png");
         }
         onTestEnd(itr);
     }
@@ -32,9 +33,11 @@ public class InitTestCase extends TestListenerAdapter{
     @Override
     public void onTestSkipped(ITestResult itr) {
         String captureImage = FileHelper.getXmlNodeValue("//Configuration/CaptureImage/text()",0);
+
         if(captureImage.toLowerCase() != "false") {
-            WebUI.captureScreen(Environemnts.REPORTS_PATH + "images\\" + itr.getName() + "_" + Utility.getUnique("yyMMdd_HHmmss") + ".png");
+            WebUI.captureScreen(Environments.REPORTS_PATH + "images\\" + itr.getName() + "_" + Utility.getUnique("yyMMdd_HHmmss") + ".png");
         }
+
         onTestEnd(itr);
     }
 
@@ -57,15 +60,14 @@ public class InitTestCase extends TestListenerAdapter{
             default:
                 testResult = "skipped";
         }
-        try {
-            //Update to google sheet: https://docs.google.com/spreadsheets/d/1UwclfT7WzOvtQA7qa5o2KdATal8LIWO1yLkQss6tXj4/edit#gid=0
-            long millis = System.currentTimeMillis() - startTime;
-            // convert duration format ("HH:mm:ss.SSS")
-            String duration = String.format("%02d:%02d:%02d.%03d", millis / 3600000, ((millis/1000) % 3600) / 60, ((millis/1000) % 60), (millis % 1000));
-            GoogleSheets.updateTestCaseStatus(itr.getMethod().getDescription(), startDate, duration, testResult);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        //Update to google sheet: https://docs.google.com/spreadsheets/d/1UwclfT7WzOvtQA7qa5o2KdATal8LIWO1yLkQss6tXj4/edit#gid=0
+        long millis = System.currentTimeMillis() - startTime;
+
+        // convert duration format ("HH:mm:ss.SSS")
+        String duration = String.format("%02d:%02d:%02d.%03d", millis / 3600000, ((millis/1000) % 3600) / 60, ((millis/1000) % 60), (millis % 1000));
+        GoogleSheets.updateTestCaseStatus(itr.getMethod().getDescription(), startDate, duration, testResult);
+
         WebUI.deleteAllCookies();
         Utility.logInfo("TESTCASE","*** End TestCase: " + itr.getMethod().getDescription() + " ***", 1);
     }

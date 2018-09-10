@@ -200,8 +200,10 @@ public class WebUI extends Driver {
         try {
             Robot robot = new Robot();
             robot.setAutoDelay(300);
+
             robot.keyPress(keycode); // keycode = KeyEvent.VK_CONTROL
             robot.keyRelease(keycode);
+
             Thread.sleep(2000);
         } catch (Exception e){
             e.printStackTrace();
@@ -220,12 +222,14 @@ public class WebUI extends Driver {
             Thread.sleep(2000);
             Robot robot = new Robot();
             robot.setAutoDelay(500);
+
             robot.keyPress(KeyEvent.VK_CONTROL);
             robot.keyPress(KeyEvent.VK_V);
             robot.keyRelease(KeyEvent.VK_V);
             robot.keyRelease(KeyEvent.VK_CONTROL);
             robot.keyPress(KeyEvent.VK_ENTER);
             robot.keyRelease(KeyEvent.VK_ENTER);
+
             Thread.sleep(2000);
         } catch (Exception e){
             e.printStackTrace();

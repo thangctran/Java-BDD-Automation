@@ -2,11 +2,9 @@ package tests;
 
 import java.util.List;
 import java.util.Map;
-
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
-
 import constants.GolobalVariabes;
 import helpers.FileHelper;
 import pages.fe.CarsPage;
@@ -19,7 +17,7 @@ import utilities.Utility;
 public class FilterSearchTest {
     @BeforeSuite
     public void startTestSuite(){
-        Driver.setDriver(Driver.setSeleniumDrivers());
+        if(Driver.getDriver() == null) Driver.setDriver(Driver.setSeleniumDrivers());
     }
 
     @AfterSuite

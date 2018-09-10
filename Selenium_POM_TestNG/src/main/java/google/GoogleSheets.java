@@ -79,51 +79,85 @@ public class GoogleSheets {
                 .build();
     }
 
-    public static void setCellValue(String sheetName, String columnName, int rowIndex, String value) throws IOException, GeneralSecurityException{
-        String range = sheetName + "!" + columnName + rowIndex;//"UI-Report-Firefox!A2";
-        ValueRange body = new ValueRange().setValues(Arrays.asList(Arrays.asList(value)));
-        UpdateValuesResponse result = getSheetsService().spreadsheets().values()
-                .update(SPREADSHEET_ID, range, body)
-                .setValueInputOption("RAW")
-                .execute();
+    public static void setCellValue(String sheetName, String columnName, int rowIndex, String value){
+        try {
+            String range = sheetName + "!" + columnName + rowIndex;//"UI-Report-Firefox!A2";
+            ValueRange body = new ValueRange().setValues(Arrays.asList(Arrays.asList(value)));
+            UpdateValuesResponse result = getSheetsService().spreadsheets().values()
+                    .update(SPREADSHEET_ID, range, body)
+                    .setValueInputOption("RAW")
+                    .execute();
+        } catch (IOException | GeneralSecurityException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static String getCellValue(String sheetName, String columnName, int rowIndex) throws IOException, GeneralSecurityException{
-        String range = sheetName + "!" + columnName + rowIndex;//"UI-Report-Firefox!A2";
-        ValueRange response = getSheetsService().spreadsheets().values()
-                .get(SPREADSHEET_ID, range)
-                .execute();
-        if(response.getValues() != null) return String.valueOf(response.getValues().get(0).get(0));
-        else return null;
+    public static String getCellValue(String sheetName, String columnName, int rowIndex){
+        try {
+            String range = sheetName + "!" + columnName + rowIndex;//"UI-Report-Firefox!A2";
+            ValueRange response = getSheetsService().spreadsheets().values()
+                    .get(SPREADSHEET_ID, range)
+                    .execute();
+            return String.valueOf(response.getValues().get(0).get(0));
+        } catch (IOException | GeneralSecurityException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     //Update to google sheet: https://docs.google.com/spreadsheets/d/1UwclfT7WzOvtQA7qa5o2KdATal8LIWO1yLkQss6tXj4/edit#gid=0
-    public static void updateTestCaseStatus(String testCaseName, String startDate, String duration, String status) throws IOException, GeneralSecurityException{
-        String range = googleSheetName + "!A:A";
-        ValueRange response = getSheetsService().spreadsheets().values()
-                .get(SPREADSHEET_ID, range)
-                .execute();
-        List<String> testCase = Arrays.asList(testCaseName);
-        int findRowIndex = response.getValues().indexOf(testCase);
-        if(findRowIndex <= 0) {
-            findRowIndex = response.getValues().size() + 1;
-            setCellValue(googleSheetName, "A", findRowIndex, testCaseName);
+    public static void updateTestCaseStatus(String testCaseName, String startDate, String duration, String status){
+        try {
+            String range = googleSheetName + "!A:A";
+            ValueRange response = getSheetsService().spreadsheets().values()
+                    .get(SPREADSHEET_ID, range)
+                    .execute();
+            List<String> testCase = Arrays.asList(testCaseName);
+            int findRowIndex = response.getValues().indexOf(testCase);
+            if(findRowIndex <= 0) {
+                findRowIndex = response.getValues().size() + 1;
+                setCellValue(googleSheetName, "A", findRowIndex, testCaseName);
+            } else findRowIndex += 1;
+            setCellValue(googleSheetName, "C", findRowIndex, startDate);
+            setCellValue(googleSheetName, "D", findRowIndex, duration);
+            setCellValue(googleSheetName, "F", findRowIndex, status);
+        } catch (IOException | GeneralSecurityException e) {
+            e.printStackTrace();
         }
-        setCellValue(googleSheetName, "C", findRowIndex, startDate);
-        setCellValue(googleSheetName, "D", findRowIndex, duration);
-        setCellValue(googleSheetName, "F", findRowIndex, status);
     }
 
-    public static void insertColumnTestStatus() throws IOException, GeneralSecurityException{
-        String range = "UI-Report-Chrome!E1:E";//googleSheetName + "!E1:E";
-        String startDate = getUnique("yyyy/MM/dd HH:mm:ss");
-        ValueRange body = new ValueRange().setValues(Arrays.asList(Arrays.asList(startDate)));
-        AppendValuesResponse appendResult = getSheetsService().spreadsheets().values()
-                .append(SPREADSHEET_ID, range, body)
-                .setValueInputOption("USER_ENTERED")
-                .setInsertDataOption("INSERT_ROWS")
-                .setIncludeValuesInResponse(true)
-                .execute();
+    public static void updateTestCaseIssue(String testCaseName, String descriptionIssue){
+        try {
+            String range = googleSheetName + "!A:A";
+            ValueRange response = getSheetsService().spreadsheets().values()
+                    .get(SPREADSHEET_ID, range)
+                    .execute();
+            List<String> testCase = Arrays.asList(testCaseName);
+            int findRowIndex = response.getValues().indexOf(testCase);
+            if (findRowIndex <= 0) {
+                findRowIndex = response.getValues().size() + 1;
+                setCellValue(googleSheetName, "A", findRowIndex, testCaseName);
+            } else findRowIndex += 1;
+            setCellValue(googleSheetName, "E", findRowIndex, descriptionIssue);
+        } catch (IOException | GeneralSecurityException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void insertColumnTestStatus(){
+        try {
+            String range = "UI-Report-Chrome!E1:E";//googleSheetName + "!E1:E";
+            String startDate = getUnique("yyyy/MM/dd HH:mm:ss");
+            ValueRange body = new ValueRange().setValues(Arrays.asList(Arrays.asList(startDate)));
+            AppendValuesResponse appendResult = getSheetsService().spreadsheets().values()
+                    .append(SPREADSHEET_ID, range, body)
+                    .setValueInputOption("USER_ENTERED")
+                    .setInsertDataOption("INSERT_ROWS")
+                    .setIncludeValuesInResponse(true)
+                    .execute();
+        } catch (IOException | GeneralSecurityException e) {
+            e.printStackTrace();
+        }
     }
 //    public static void main(String... args) throws IOException, GeneralSecurityException {
 //        insertColumnTestStatus();

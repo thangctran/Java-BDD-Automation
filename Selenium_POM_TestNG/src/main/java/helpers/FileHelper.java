@@ -23,15 +23,16 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
+
+import constants.Environments;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
-import constants.Environemnts;
 import utilities.Utility;
 
 public class FileHelper {
-    public final static String LOG_FILE = Environemnts.REPORTS_PATH + "LogDetail_" + Utility.getUnique("yyMMddHHmmss") + ".txt";
+    public final static String LOG_FILE = Environments.REPORTS_PATH + "LogDetail_" + Utility.getUnique("yyMMddHHmmss") + ".txt";
 
     public static void writeTextFile(String strFileLocation, String strTextContent){
         try {
@@ -85,7 +86,7 @@ public class FileHelper {
         List<String> list = new ArrayList();
 
         // Optimize the input XML file location to the correct syntax
-        String xmlFilePath = Environemnts.CONFIG_FILE;
+        String xmlFilePath = Environments.CONFIG_FILE;
 
         // Initiate returnedValue is null
         String returnedValue = null;
@@ -132,7 +133,7 @@ public class FileHelper {
                 throw new Exception("Row 0 is used as header name, row index must start from 1");
             } else {
                 // Initiate test data location path
-                String strTestDataPath = Environemnts.DATA_PATH  + "\\" + strTestDataName;
+                String strTestDataPath = Environments.DATA_PATH  + "\\" + strTestDataName;
 
                 // Initiate column count variable
                 int iCol = 0;
@@ -206,7 +207,7 @@ public class FileHelper {
                 throw new Exception("Row 0 is used as header name, row index must start from 1");
             } else {
                 // -define .csv file in app
-                String fileNameDefined = Environemnts.DATA_PATH  + strCSVName;
+                String fileNameDefined = Environments.DATA_PATH  + strCSVName;
 
                 //put data to map
                 String[] arrayHeader = getTextFile(fileNameDefined, 0).split(delimiter);

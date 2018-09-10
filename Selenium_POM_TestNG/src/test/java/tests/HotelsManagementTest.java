@@ -6,7 +6,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
-import constants.Environemnts;
+import constants.Environments;
 import constants.GolobalVariabes;
 import pages.be.HotelsManagementPage;
 import pages.be.LoginBEPage;
@@ -17,7 +17,7 @@ public class HotelsManagementTest {
 
     @BeforeSuite
     public void startTestSuite(){
-        Driver.setDriver(Driver.setSeleniumDrivers());
+        if(Driver.getDriver() == null) Driver.setDriver(Driver.setSeleniumDrivers());
     }
 
     @AfterSuite
@@ -29,7 +29,7 @@ public class HotelsManagementTest {
     public void BE006_Hotels() {
           //set variables
         String rowIndex = String.valueOf(Utility.getRandomInt(1,9));
-        String imageUpload = Environemnts.DATA_PATH + "Image.PNG";
+        String imageUpload = Environments.DATA_PATH + "Image.PNG";
 
         Utility.logInfo("STEP", "Navigate and login as Admin to page https://www.phptravels.net/admin", 1);
         LoginBEPage.login(GolobalVariabes.urlBE, GolobalVariabes.emailBE, GolobalVariabes.passwordBE);

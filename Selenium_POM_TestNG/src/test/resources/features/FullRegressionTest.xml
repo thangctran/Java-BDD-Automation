@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Full Regression Test Suite" verbose="1" preserve-order="true" parallel="none">
+    <listeners>
+        <listener class-name="utilities.InitTestCase" />
+        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+    </listeners>
+    <test name="Regression Test" >
+        <classes>
+            <class name="tests.LoginTest"/>
+            <class name="tests.HotelsManagementTest"/>
+            <class name="tests.FilterSearchTest"/>
+        </classes>
+    </test>
+</suite>

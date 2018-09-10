@@ -1,11 +1,10 @@
 package tests;
 
+import java.lang.reflect.Method;
 import java.util.Map;
-
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
-
 import constants.GolobalVariabes;
 import drivers.Driver;
 import keywords.WebUI;
@@ -14,12 +13,13 @@ import pages.be.MainBEPage;
 import pages.be.LoginBEPage;
 import pages.fe.MyAccountPage;
 import utilities.Utility;
+import google.GoogleSheets;
 
 public class LoginTest {
 
     @BeforeSuite
     public void startTestSuite(){
-        Driver.setDriver(Driver.setSeleniumDrivers());
+        if(Driver.getDriver() == null) Driver.setDriver(Driver.setSeleniumDrivers());
     }
 
     @AfterSuite
@@ -59,7 +59,7 @@ public class LoginTest {
     }
 
     @Test(priority = 0, description = "BE002-Login-Login to page unsuccessful")
-    public void BE002_LoginBE() {
+    public void BE002_LoginBE(Method method) {
         //Define test data
         Map<String, String> data = FileHelper.getTestDataRow("testData.xlsx", "login", 1);
 
@@ -68,6 +68,7 @@ public class LoginTest {
         LoginBEPage.verifyErrorMessage(data.get("errorMessage"));
 
         Utility.logInfo("STEP","Login with blank 'Email' and 'Password'", 1);
+        GoogleSheets.updateTestCaseIssue(method.getAnnotation(Test.class).description(), "#12345");
         LoginBEPage.login(GolobalVariabes.urlBE, "", "");
         LoginBEPage.verifyWarningMessage();
     }
